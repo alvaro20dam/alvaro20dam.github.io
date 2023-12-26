@@ -9,4 +9,5 @@ Freelance
 ### Projects
 
 - Project 1
+![plot](/assets/images/mpgPlot.png)
 - Project 2
