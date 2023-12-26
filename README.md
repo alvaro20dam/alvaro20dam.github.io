@@ -1,6 +1,6 @@
 # Alvaro_Portfolio
 
-![yo](Foto1.jpg)
+![yo](assets\images\Foto1.jpg)
 
 Data Analytics Alvaro_Portfolio
 
