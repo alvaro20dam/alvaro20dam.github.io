@@ -1,5 +1,7 @@
 # Alvaro_Portfolio
 
+![yo](Foto1.jpg)
+
 Data Analytics Alvaro_Portfolio
 
 ## Education
@@ -8,5 +10,5 @@ Freelance
 
 ### Projects
 
-- [Project 1](https://github.com/alvaro20dam/Pandas-Data-Science-Tasks)
+- Project 1
 - Project 2
