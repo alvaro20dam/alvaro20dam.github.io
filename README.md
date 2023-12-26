@@ -10,11 +10,3 @@ Freelance
 
 - Project 1
 - Project 2
-
-`{r Prueba, echo=FALSE}
-
-    library(tidyverse)
-    data()
-    head(mpg)
-
-`
