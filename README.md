@@ -1,10 +1,12 @@
 # Alvaro_Portfolio
+
 Data Analytics Alvaro_Portfolio
 
-### Education
+## Education
+
 Freelance
 
 ### Projects
-- Project 1
-- Project 2 
 
+- Project 1
+- Project 2
