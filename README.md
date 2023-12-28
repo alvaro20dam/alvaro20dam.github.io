@@ -24,3 +24,10 @@ As Survived is a factor (i.e., categorical) variable, a bar chart
 is a great visualization to use
 
 ![Barchart](/assets/img/plot1.png) "fotochart"
+
+Second question - What was the survival rate by gender?
+
+We can use color to look at two aspects (i.e., dimensions)
+of the data simultaneously
+
+![Barchart](/assets/img/plot2.png) "fotochart2"
