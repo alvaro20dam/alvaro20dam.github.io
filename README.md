@@ -31,3 +31,7 @@ We can use color to look at two aspects (i.e., dimensions)
 of the data simultaneously
 
 ![Barchart](/assets/img/plot2.png) "fotochart2"
+
+ Third question - What was the survival rate by class of ticket?
+
+![Barchart](/assets/img/plot3.png) "fotochart3"
