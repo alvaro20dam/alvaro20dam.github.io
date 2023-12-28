@@ -23,4 +23,4 @@ First question - What was the survival rate?
 As Survived is a factor (i.e., categorical) variable, a bar chart
 is a great visualization to use
 
-![Barchart](SurvivedBarChart.png)
+![Barchart]/SurvivedBarChart.png)
