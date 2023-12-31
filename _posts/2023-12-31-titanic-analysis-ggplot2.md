@@ -5,7 +5,7 @@ title: Data analysis of titanic passenger data
 
 ## Load Titanic data for analysis. Open in spreadsheet view
 
-```{r}
+```{% highlight r %}
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
 View(titanic)
 ```
