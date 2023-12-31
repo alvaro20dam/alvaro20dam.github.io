@@ -52,3 +52,7 @@ ggplot(titanic, aes(x = Survived, fill = Sex)) +
 {% endhighlight %}
 
 ![Second question graph](/assets/img/Rplot2Titanic.png)"footnote2"
+
+## From tableau
+
+![tableau db](/assets/img/Dashboard%202.png)
