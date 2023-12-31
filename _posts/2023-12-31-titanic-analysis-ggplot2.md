@@ -1,8 +1,9 @@
 ---
 layout: post
+title: Data analysis of titanic passenger data
 ---
 
-# Load Titanic data for analysis. Open in spreadsheet view
+## Load Titanic data for analysis. Open in spreadsheet view
 
 ```{r}
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
