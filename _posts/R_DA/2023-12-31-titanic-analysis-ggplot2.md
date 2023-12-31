@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Data analysis of titanic passenger data
-post_image: "/assets/img/Rplot2Titanic"
+post_image: /assets/img/Rplot2Titanic
 ---
 We'll start our visual analysis of the data focusing on questions
 related to survival rates. Specifically, these questions will use
