@@ -33,3 +33,18 @@ As Survived is a factor (i.e., categorical) variable, a bar chart
 is a great visualization to use
 
 ![First question graph](/assets/img/Rplot1Titanic.png) "footnote"
+
+## Second question - What was the survival rate by gender?
+
+We can use color to look at two aspects (i.e., dimensions)
+of the data simultaneously
+
+{% highlight r %}
+ggplot(titanic, aes(x = Survived, fill = Sex)) +
+  theme_bw() +
+  geom_bar() +
+  labs(y = "Passenger Count",
+       title = "Titanic Survival Rates by Sex")
+{% endhighlight %}
+
+![Second question graph](/assets/img/Rplot2Titanic.png)"footnote2"
