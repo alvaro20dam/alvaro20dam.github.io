@@ -26,10 +26,10 @@ titanic$Embarked <- as.factor(titanic$Embarked)
 
 ## Titanic Data
 
-| Syntax | Description |
-| ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
+| Pclass | Survived | Sex | Embarked |
+| ----------- | ----------- | ----- | --------- |
+| Primer | Yes | Male | Yes |
+| Second | No | Female | No |
 
 ## First question - What was the survival rate?
 
