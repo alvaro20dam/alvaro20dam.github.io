@@ -32,4 +32,4 @@ powerful features for visualizing factor data
 As Survived is a factor (i.e., categorical) variable, a bar chart
 is a great visualization to use
 
-![First question graph](/assets/img/Rplot1Titanic.png)
+![First question graph](/assets/img/Rplot1Titanic.png) "footnote"
