@@ -2,6 +2,11 @@
 layout: post
 title: Data analysis of titanic passenger data
 ---
+We'll start our visual analysis of the data focusing on questions
+related to survival rates. Specifically, these questions will use
+the factor (i.e., categorical) variables in the data. Factor data
+is very common in the business context and ggplot2 offers many
+powerful features for visualizing factor data
 
 ## Load Titanic data for analysis. Open in spreadsheet view
 
@@ -21,11 +26,10 @@ titanic$Embarked <- as.factor(titanic$Embarked)
 
 ## Titanic Data
 
-We'll start our visual analysis of the data focusing on questions
-related to survival rates. Specifically, these questions will use
-the factor (i.e., categorical) variables in the data. Factor data
-is very common in the business context and ggplot2 offers many
-powerful features for visualizing factor data
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
 
 ## First question - What was the survival rate?
 
