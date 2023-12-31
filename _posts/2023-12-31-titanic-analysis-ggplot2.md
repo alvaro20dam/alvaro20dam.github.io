@@ -4,19 +4,19 @@ layout: post
 
 # Load Titanic data for analysis. Open in spreadsheet view
 
-`
+```{r}
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
 View(titanic)
-`
+```
 
 ## Set up factors
 
-`
+```{r}
 titanic$Pclass <- as.factor(titanic$Pclass)
 titanic$Survived <- as.factor(titanic$Survived)
 titanic$Sex <- as.factor(titanic$Sex)
 titanic$Embarked <- as.factor(titanic$Embarked)
-`
+```
 
 ## Titanic Data
 
