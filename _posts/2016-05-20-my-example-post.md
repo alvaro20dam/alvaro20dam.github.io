@@ -1,5 +1,9 @@
 ---
 layout: post
+title: "Prueba5"
+author: "Alvaro Gonzalez"
+date: "`r Sys.Date()`"
+output: html_document
 ---
 
 
@@ -85,4 +89,3 @@ ggplot(mpg, aes(cty, hwy)) +
   geom_smooth(method = "lm")
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
-
