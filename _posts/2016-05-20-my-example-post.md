@@ -3,8 +3,9 @@ layout: post
 author: "Alvaro Gonzalez"
 ---
 
+# Hola chicos
 
-```{r setup, include=FALSE}
+```r
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(ggplot2)
@@ -14,9 +15,9 @@ library(ggplot2)
 
 In this chapter, we’ll mostly use one data set that’s bundled with ggplot2: mpg. It includes information about the fuel economy of popular car models in 1999 and 2008, collected by the US Environmental Protection Agency, <http://fueleconomy.gov>. You can access the data by loading ggplot2:
 
-# mpg data
+### mpg data
 
-```{r mpg, echo=FALSE}
+```r
 data()
 head(mpg)
 ```
@@ -39,34 +40,34 @@ This dataset suggests many interesting questions. How are engine size and fuel e
 
 Podemos utilizar la gramatica de las graficas (ggplot2)
 
-```{r pressure, echo=FALSE}
+```r
 ggplot(mpg, aes(x = displ, y = hwy, colour = class, size = cyl)) + 
   geom_point()
 ```
 
 Esta grafica esta interesante
 
-``` {r temperature, echo=FALSE}
+``` r
 ggplot(diamonds, aes(reorder(cut, price), price)) + geom_violin()
 ```
 
 Grafica de manufacturer de carros, cual es la mas rendidora en displ
 
-``` {r manufacturer, echo=FALSE}
+{% highlight r %}
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() + 
   facet_wrap(~manufacturer)
-```
+{ endhighlight }
 
 Incluimos tambien
 
-``` {r tumadre, echo=TRUE}
+``` r
 cars
 ```
 
 # Otro Grafico
 
-```{r desplazamiento}
+```r
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() + 
   geom_smooth(span = 0.2)
@@ -76,7 +77,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 What’s the problem with the plot created by ggplot above? Which of the geoms described above is most effective at remedying the problem?
 
-```{r Respuesta1, echo=FALSE}
+```r
 
 ggplot(mpg, aes(cty, hwy)) + geom_point()
 
