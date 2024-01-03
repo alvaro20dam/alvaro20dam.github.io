@@ -1,9 +1,6 @@
 ---
 layout: post
-title: "Prueba5"
 author: "Alvaro Gonzalez"
-date: "`r Sys.Date()`"
-output: html_document
 ---
 
 
