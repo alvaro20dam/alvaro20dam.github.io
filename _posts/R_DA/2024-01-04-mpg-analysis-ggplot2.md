@@ -6,7 +6,7 @@ categories: data analisis
 ---
 Comenzamos observando los datos, aqui una muestra de ellos
 
-![data](/assets/img/mpgDataPic.png)"Fuente: **"
+![data](/assets/img/mpgDataPic.png)
 
 ## Descripcion
 
