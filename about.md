@@ -12,7 +12,8 @@ On this webpage, you will find some of my data science projects, where I showcas
 
 My goal is to learn new things, improve my skills, and share my knowledge with others. I am always open to feedback, collaboration, and new opportunities. If you want to get in touch with me, you can contact me through my email or social media links.
 
-### Thank you for visiting my webpage, and I hope you enjoy it!
+### Thank you for visiting my webpage, and I hope you enjoy it
+
 ---
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
