@@ -4,7 +4,7 @@ title:  "Analisis de datos MPG"
 date:   2024-01-04 07:44:27 -0400
 categories: data analisis
 ---
-Comenzamos observando los datos, aqui una muestra de ellos
+Comenzamos observando los datos, aqui una muestra de ellos.
 
 ![data-snipp](/assets/img/mpgDataPic.png)
 
