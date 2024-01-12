@@ -1,14 +1,15 @@
-title: Your awesome title
+title: a_data_trip
 author:
-  name: GitHub User
-  email: your-email@domain.com
+  name: alvaro20dam
+  email: alvaro20dam@hotmail.com
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  Write an awesome description for your new site here. You can edit this line
-  in _config.yml. It will appear in your document head meta (for Google search
-  results) and in your feed.xml site description.
+
+ In this website, you can find some of the projects I have worked on, as well as my blog posts, 
+ where I share my thoughts and tips on data science topics. You can also learn more about me, 
+ my skills, and my contact details.
 
 # Build settings
 
@@ -31,6 +32,7 @@ plugins:
 header_pages:
   - about.md
   - contact.md
+  - vitaecr.md
 
 # Set to `true` to show excerpts on the homepage.
 show_excerpts: true
@@ -62,13 +64,13 @@ minima:
   #  - { platform: google_scholar, user_url: "https://scholar.google.com/citations?user=qc6CJjYAAAAJ" }
     - { platform: instagram,      user_url: "https://www.instagram.com/jekyll" }
   #  - { platform: keybase,        user_url: "https://keybase.io/jekyll" }
-    - { platform: linkedin,       user_url: "https://www.linkedin.com/in/jekyll" }
+    - { platform: linkedin,       user_url: "https://www.linkedin.com/in/alvaro20dam/" }
   #  - { platform: microdotblog,   user_url: "https://micro.blog/jekyll" }
   #  - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
   #  - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/jekyll" }
     - { platform: telegram,       user_url: "https://t.me/jekyll" }
   #  - { platform: twitter,        user_url: "https://twitter.com/jekyllrb" }
-    - { platform: x,              user_url: "https://x.com/jekyllrb" }
+    - { platform: x,              user_url: "https://twitter.com/alvarogonz" }
     - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
 
 
