@@ -9,7 +9,7 @@ Ya todos sabemos el cuento del titanic, en esta oportunidad vamos a contarle otr
 
 La data a continuacion fue recopilada por \*\* y procederemos a desglosarla y a `detallarla` con argumentos dentro de `R` para esto utilizaremos los paquetes **ddplyr** y **ggplot** disponibles en link
 
-```r
+```{r}
 titanic <- read.csv("titanic.csv", header= TRUE)
 str(titanic)
 ```
