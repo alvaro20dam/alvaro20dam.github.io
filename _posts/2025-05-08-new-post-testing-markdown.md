@@ -7,7 +7,7 @@ title: testing markdown
 
 ...look at this screenshot
 
-![A single pic](/assets/img/Dashboard 2.png)
+![Pic](/assets/img/Dashboard 2.png)
 
 mermaid
 graph TD;
