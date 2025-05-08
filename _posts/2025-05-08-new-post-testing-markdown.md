@@ -24,9 +24,11 @@ Task list
 
 <details>
     <summary>Q1: What is the best</summary>
-    A1: Opensource.com  
-    A2: Otro.com  
-    A3: Otherone.com  
+    A1: Opensource.com
+
+    A2: Otro.com
+
+    A3: Otherone.com
 </details>
 
 | Header 1 | Header 2 | Header 3 |
