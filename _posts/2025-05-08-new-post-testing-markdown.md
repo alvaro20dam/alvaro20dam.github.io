@@ -10,11 +10,8 @@ title: testing markdown
 ![Pic](/assets/img/Dashboard 2.png)
 
 ```mermaid
-graph TD;
+graph TD
     A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
 ```
 
 Task list
