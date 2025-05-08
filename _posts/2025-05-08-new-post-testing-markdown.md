@@ -6,6 +6,7 @@ title: testing markdown
 ## Markdown amigos
 
 ...look at this screenshot
+
 ![A single pic](/assets/img/Dashboard 2.png)
 
 mermaid
