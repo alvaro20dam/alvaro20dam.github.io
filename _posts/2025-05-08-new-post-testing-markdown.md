@@ -9,12 +9,13 @@ title: testing markdown
 
 ![Pic](/assets/img/Dashboard 2.png)
 
-mermaid
+```mermaid
 graph TD;
     A-->B;
     A-->C;
     B-->D;
     C-->D;
+```
 
 Task list
 
