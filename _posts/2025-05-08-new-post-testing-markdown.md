@@ -41,3 +41,11 @@ Task list
 | Row 5, Col 1 | Row 5, Col 2 | Row 5, Col 3 | Row 5, Col 4 | Row 5, Col 5 | Row 5, Col 6 |
 | Row 6, Col 1 | Row 6, Col 2 | Row 6, Col 3 | Row 6, Col 4 | Row 6, Col 5 | Row 6, Col 6 |
 | Row 7, Col 1 | Row 7, Col 2 | Row 7, Col 3 | Row 7, Col 4 | Row 7, Col 5 | Row 7, Col 6 |
+
+```mermaid
+graph TD
+    A[Start] --> B{Decision};
+    B -- Yes --> C[Process 1];
+    B -- No --> D[Process 2];
+    C --> E[End];
+    D --> E;
