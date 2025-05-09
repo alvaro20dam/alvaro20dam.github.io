@@ -340,3 +340,64 @@ plt.show()
 - **Median House Value: The Target Variable.** "Finally, the 'median_house_value' histogram, our target variable, shows a distribution with a primary peak in the lower to middle price range, followed by a decreasing frequency as prices increase. The noticeable spike at the far right might indicate a cap or a grouping of very high-value properties. Understanding this distribution is central to any predictive modeling or analysis we might undertake."
 
 In essence, these histograms provide a valuable visual summary of the characteristics of our California housing dataset. They reveal the geographic spread, the age of properties, the size of units, population densities, income levels, and the distribution of our target variable – median house value. This visual exploration sets the stage for deeper statistical analysis and modeling.
+
+```python
+import numpy as np
+
+def split_train_test(data, test_ratio):
+    shuffled_indices = np.random.permutation(len(data))
+    test_set_size = int(len(data) * test_ratio)
+    test_indices = shuffled_indices[:test_set_size]
+    train_indices = shuffled_indices[test_set_size:]
+    return data.iloc[train_indices], data.iloc[test_indices]
+```
+```python
+train_set, test_set = split_train_test(housing, 0.2)
+```
+
+
+```python
+len(train_set)
+```
+
+
+
+
+    16512
+
+
+
+
+```python
+len(test_set)
+```
+
+
+
+
+    4128
+
+
+
+
+```python
+housing["income_cat"] = pd.cut(housing["median_income"], 
+                               bins=[0., 1.5, 3.0, 4.5, 6., np.inf], 
+                               labels=[1, 2, 3, 4, 5])
+```
+
+
+```python
+housing["income_cat"].hist()
+```
+
+
+
+
+    <Axes: >
+
+
+
+
+    
+![png](output_15_1.png)
