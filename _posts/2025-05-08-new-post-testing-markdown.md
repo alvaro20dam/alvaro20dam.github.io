@@ -400,4 +400,4 @@ housing["income_cat"].hist()
 
 
     
-![png](output_15_1.png)
+![png](/assets/img/output_15_1.png)
