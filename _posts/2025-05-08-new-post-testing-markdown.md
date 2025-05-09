@@ -17,6 +17,7 @@ The California housing market is a complex beast, with prices that can leave you
 housing = load_housing_data()
 housing.head()
 ```
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -24,7 +25,7 @@ housing.head()
     }
 
     .dataframe tbody tr th {
-        vertical-align: top;
+        vertical-align: right;
     }
 
     .dataframe thead th {
