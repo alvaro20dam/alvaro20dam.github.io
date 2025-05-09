@@ -3,8 +3,6 @@ layout: post
 title: "Unlocking Housing Insights: A Statistical Journey Through California Real Estate"
 ---
 
-## Introduction
-
 The California housing market is a complex beast, with prices that can leave you breathless and trends that shift like the sands. But fear not! In this lesson, we'll use the power of statistics to make sense of it all. Did you know, for example, that the median house value in our dataset is $206,855? But what does that really mean? Let's dive in...
 
 ## Unpacking the concepts
@@ -20,6 +18,12 @@ housing.head()
 
 <div class="dataframe-container">
 <style scoped>
+    .dataframe-container {
+        overflow-x: auto;
+        max-width: 100%;
+        margin-right: auto;
+    }
+
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
