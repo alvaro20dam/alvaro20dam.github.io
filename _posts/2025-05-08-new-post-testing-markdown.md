@@ -152,8 +152,15 @@ housing.describe()
 
 
 
-<div>
+<div class="dataframe-container">
+
 <style scoped>
+    .dataframe-container {
+        overflow-x: auto;
+        max-width: 100%;
+        margin-right: auto;
+    }
+
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
