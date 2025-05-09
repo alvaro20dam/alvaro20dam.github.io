@@ -281,4 +281,13 @@ housing.describe()
   </tbody>
 </table>
 </div>
-  
+
+---
+
+```python
+%matplotlib inline
+import matplotlib.pyplot as plt
+housing.hist(bins=50, figsize=(20,15))
+plt.show()
+```
+![png](/assets/img/output_9_0.png)
