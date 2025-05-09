@@ -18,7 +18,7 @@ housing = load_housing_data()
 housing.head()
 ```
 
-<div>
+<div class="dataframe-container">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
