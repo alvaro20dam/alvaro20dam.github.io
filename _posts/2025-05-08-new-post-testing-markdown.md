@@ -133,8 +133,6 @@ Even within this seemingly close geographical range, we can already observe sign
 
 The `housing.info()` output provides a valuable snapshot of our California housing dataset. It reveals that we are working with a DataFrame containing 20,640 entries, each representing a distinct housing district. These entries are indexed from 0 to 20,639.
 
-
-
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 20640 entries, 0 to 20639
     Data columns (total 10 columns):
@@ -176,9 +174,6 @@ In summary, this initial inspection tells us we have a moderately sized dataset 
 ```python
 housing.describe()
 ```
-
-
-
 
 <div class="dataframe-container">
 
@@ -413,7 +408,6 @@ strat_test_set["income_cat"].value_counts() / len(strat_test_set)
     1    0.039971
     Name: count, dtype: float64
 
-
 After creating the stratified samples, it's good practice to remove the `income_cat` column, as it was only used for the stratified sampling process.
 
 ```python
@@ -472,16 +466,10 @@ numerical_housing = housing.select_dtypes(include=np.number)
 corr_matrix = numerical_housing.corr()
 ```
 
-
-
-
-
 1. Selecting Numerical Attributes:
 First, we isolate the numerical columns from our `housing` DataFrame. This is crucial because correlation is only meaningful for numerical data. The select_dtypes(include=np.number) function efficiently filters out any non-numerical columns, creating a new DataFrame called numerical_housing that contains only the numerical features.
 2. Computing the Correlation Matrix:
 Next, we use the `.corr()` method on the `numerical_housing` DataFrame. This method calculates the Pearson correlation coefficient between every pair of numerical columns. The result is stored in the `corr_matrix` variable.
-
-
 
 The resulting `corr_matrix` is a square table where:
 
@@ -555,6 +543,7 @@ This code generates a scatter plot that visually represents the relationship bet
 housing.plot(kind="scatter", x="median_income", y="median_house_value",
 alpha=0.1)
 ```
+
 ![png](/assets/img/output_24_1.png)
 
 Here's a breakdown:
@@ -586,3 +575,83 @@ housing["rooms_per_household"] = housing["total_rooms"]/housing["households"]
 housing["bedrooms_per_room"] = housing["total_bedrooms"]/housing["total_rooms"]
 housing["population_per_household"]=housing["population"]/housing["households"]
 ```
+
+These lines of code are creating three new columns in our housing DataFrame by combining existing columns. The goal is to potentially uncover more meaningful relationships and patterns that might not be directly evident from the original features alone.
+
+`housing["rooms_per_household"] = housing["total_rooms"]/housing["households"]`
+
+- **Purpose:** This line calculates the average number of rooms per household in each district.
+- **Insight:** Instead of just looking at the total number of rooms or the total number of households independently, this ratio gives you a sense of the size of the average household in terms of rooms. A higher value might suggest larger or less crowded living spaces.
+
+`housing["bedrooms_per_room"] = housing["total_bedrooms"]/housing["total_rooms"]`
+
+- **Purpose:** This line calculates the proportion of rooms that are bedrooms in each district.
+- **Insight:** This ratio can provide insights into the composition of the housing units. A higher value might indicate a larger proportion of bedrooms compared to other types of rooms (like living rooms, kitchens, etc.). This could be relevant for understanding the type of housing available in different areas.
+
+`housing["population_per_household"] = housing["population"]/housing["households"]`
+
+- **Purpose:** This line calculates the average number of people per household in each district.
+- **Insight:** Similar to rooms_per_household, this ratio provides a measure of household density or average household size. A higher value might suggest more crowded living conditions or larger family sizes.
+
+**Why is Feature Engineering Important?**
+
+*Improved Model Performance*: Machine learning models can often learn more effectively from features that are more directly relevant to the target variable or that capture underlying relationships in the data. These newly engineered features might have a stronger correlation with median_house_value than the original features alone.
+
+*Uncovering Hidden Patterns*: By combining existing features, you can create new features that represent more complex concepts or interactions within the data.
+
+*Domain Knowledge Integration*: Feature engineering allows you to incorporate your understanding of the problem domain (in this case, housing) to create features that are likely to be meaningful.
+
+---
+
+This code snippet and its output are crucial for understanding the linear relationships between the numerical features in your housing dataset and the target variable, `median_house_value`. Let's break it down:
+
+```python
+numerical_housing = housing.select_dtypes(include=np.number)
+corr_matrix = numerical_housing.corr()
+corr_matrix["median_house_value"].sort_values(ascending=False)
+```
+
+    median_house_value          1.000000
+    median_income               0.687151
+    rooms_per_household         0.146255
+    total_rooms                 0.135140
+    housing_median_age          0.114146
+    households                  0.064590
+    total_bedrooms              0.047781
+    population_per_household   -0.021991
+    population                 -0.026882
+    longitude                  -0.047466
+    latitude                   -0.142673
+    bedrooms_per_room          -0.259952
+    Name: median_house_value, dtype: float64
+
+1. Code Explanation
+
+`numerical_housing = housing.select_dtypes(include=np.number)`: This line selects only the numerical columns from your housing DataFrame and stores them in a new DataFrame called numerical_housing. This is necessary because correlation calculations are only meaningful for numerical data.
+
+`corr_matrix = numerical_housing.corr()`: This line calculates the Pearson correlation coefficient between all pairs of numerical columns in `numerical_housing`. The result is a correlation matrix, where each cell represents the correlation between two columns.
+
+`corr_matrix["median_house_value"].sort_values(ascending=False)`: This line selects the column representing the correlation of each feature with `median_house_value` from the `corr_matrix` and then sorts these correlation values in descending order. This makes it easy to see which features have the strongest positive or negative linear correlations with the house prices.
+
+2. Interpretation of the Output
+
+The output is a Series showing the correlation of each numerical feature with `median_house_value`, sorted from highest to lowest correlation. Here's how to interpret the key values:
+
+`median_house_value 1.000000`: This is the correlation of median_house_value with itself, which is always 1 (a perfect positive correlation).
+
+`median_income 0.687151`: This is the most important value. It shows a strong positive correlation between `median_income` and `median_house_value`. This means that, generally, as the median income in an area increases, the median house value also tends to increase. This makes intuitive sense, as affordability is a major driver of housing prices.
+
+`rooms_per_household 0.146255` and `total_rooms 0.135140`: These show a weak positive correlation. Larger houses (more rooms) tend to be worth slightly more, but the relationship is not very strong.
+
+`housing_median_age 0.114146`: A very weak positive correlation, indicating that older houses may be slightly more expensive, but the age of the house is not a primary determinant of price.
+
+`bedrooms_per_room -0.259952`: A moderate negative correlation. This is interesting; it suggests that areas with a higher proportion of bedrooms per room tend to have lower house values. This could be related to housing density or types of housing.
+
+3. Key Takeaways
+
+`median_income` is the most significant linear predictor of `median_house_value` in this dataset.
+Other features have relatively weak linear correlations, suggesting that housing prices are influenced by complex factors and may have non-linear relationships with other variables.
+
+Feature engineering (creating rooms_per_household, bedrooms_per_room, population_per_household) has introduced features with slightly stronger correlations than the original features in some cases.
+
+This correlation analysis is a vital step in exploratory data analysis and helps inform feature selection and model building.
