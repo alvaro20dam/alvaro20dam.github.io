@@ -524,6 +524,14 @@ Correlation coefficients range from -1 to 1:
 
 ---
 
+```python
+from pandas.plotting import scatter_matrix
+
+attributes = ["median_house_value", "median_income", "total_rooms", 
+              "housing_median_age"]
+scatter_matrix(housing[attributes], figsize=(12, 8))
+```
+
 Each row and column represents a numerical feature.
 The value at the intersection of a row and a column indicates the correlation coefficient between those two features.
 
@@ -536,3 +544,45 @@ As anticipated from our correlation analysis, the scatter plot between `median_i
 The histograms along the diagonal provide insights into the distribution of each variable. For instance, we can see the right-skewed nature of `median_house`_value and `total_rooms`, as well as the more varied distribution of `housing_median_age`.
 
 Overall, this scatter matrix provides a valuable visual confirmation of the linear relationships we quantified with the correlation matrix, highlighting the importance of `median_income` as a predictor while suggesting that other factors might have more complex or non-linear relationships with housing prices.
+
+---
+
+##### Visualizing the Income-Price Relationship: A Scatter Plot
+
+This code generates a scatter plot that visually represents the relationship between the median income and the median house value for different housing districts. The transparency is adjusted to help visualize the density of data points and reveal underlying trends in the data. This plot is crucial for understanding how income influences housing prices.
+
+```python
+housing.plot(kind="scatter", x="median_income", y="median_house_value",
+alpha=0.1)
+```
+![png](/assets/img/output_24_1.png)
+
+Here's a breakdown:
+
+1. **Selecting the Data and Plot Type:**
+
+- - `housing.plot(...)`: This calls the plot method on your housing DataFrame, indicating that you want to create a plot from the data in this DataFrame.
+- - `kind="scatter"`: This specifies that you want to create a scatter plot. In a scatter plot, each data point is represented as a dot.
+
+2. **Mapping Variables to Axes:**
+
+- - `x="median_income"`: This assigns the `median_income` column to the x-axis of the plot. The x-axis will represent the median income of each housing district.
+- - `y="median_house_value"`: This assigns the `median_house_value` column to the y-axis of the plot. The y-axis will represent the median house value of each housing district.
+
+3. **Setting Transparency (Alpha):**
+
+- - `alpha=0.1`: This sets the transparency (alpha) of the data points to 0.1. Alpha values range from 0 to 1, where 0 is completely transparent (invisible) and 1 is completely opaque. A value of 0.1 makes the points very transparent.
+
+**Why is `alpha=0.1` important?**
+
+In datasets with many data points, like housing datasets, using a high alpha value (e.g., 1) can result in a plot where the points overlap so much that it's difficult to see the underlying patterns. Setting alpha to a lower value makes the points more transparent, allowing you to see the density of the data and identify trends more clearly. Areas with a high concentration of points will appear darker, while sparse areas will appear lighter.
+
+---
+
+##### Creating New Features: Deriving Insights from Existing Data
+
+```python
+housing["rooms_per_household"] = housing["total_rooms"]/housing["households"]
+housing["bedrooms_per_room"] = housing["total_bedrooms"]/housing["total_rooms"]
+housing["population_per_household"]=housing["population"]/housing["households"]
+```
