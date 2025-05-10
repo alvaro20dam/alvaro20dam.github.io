@@ -122,6 +122,7 @@ housing.head()
 </table>
 </div>
 
+---
 Our first five entries in the dataset offer a fascinating initial glimpse into the geographical spread of our housing districts. Notice how the 'longitude' values hover around -122 degrees and the 'latitude' around 37-38 degrees. This immediately suggests that these initial data points are likely clustered within a specific region of California – likely the Bay Area, given these coordinates. This geographical concentration reminds us that location is a fundamental aspect of housing and will likely play a significant role in our analysis.
 
 Even within this seemingly close geographical range, we can already observe significant variability in other housing characteristics. For example, 'housing_median_age' ranges from a relatively young 21 years to a more mature 52 years within these first five entries. Similarly, the 'total_rooms' vary dramatically, from a modest 880 to a much larger 7099. This early observation underscores the diversity within the housing market, even within relatively close proximity, and hints at the complex interplay of factors that influence housing.
