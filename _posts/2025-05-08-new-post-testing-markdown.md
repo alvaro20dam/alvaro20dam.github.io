@@ -383,6 +383,8 @@ housing["income_cat"].hist()
 
 In essence, this code carves out a balanced training and testing ground and prepares the data for effective model training and evaluation.
 
+---
+
 ##### Stratified Sampling for Income Category
 
 As we've categorized the median income into distinct categories `income_cat`, the next crucial step is to ensure that our training and testing sets accurately represent the distribution of these income categories. This technique is known as stratified sampling.
@@ -395,3 +397,149 @@ for train_index, test_index in split.split(housing, housing["income_cat"]):
     strat_train_set = housing.loc[train_index]
     strat_test_set = housing.loc[test_index]
 ```
+
+Scikit-learn's `StratifiedShuffleSplit` class is perfect for this task. It ensures that each income category is represented in the training and testing sets in the same proportion as in the original dataset. This results in more robust model training and evaluation.
+
+```python
+strat_test_set["income_cat"].value_counts() / len(strat_test_set)
+```
+
+    income_cat
+    3    0.350533
+    2    0.318798
+    4    0.176357
+    5    0.114341
+    1    0.039971
+    Name: count, dtype: float64
+
+
+After creating the stratified samples, it's good practice to remove the `income_cat` column, as it was only used for the stratified sampling process.
+
+```python
+for set_ in (strat_train_set, strat_test_set):
+    set_.drop("income_cat", axis=1, inplace=True)
+```
+
+##### Exploratory Data Analysis (EDA)
+
+With our training and testing sets now properly prepared, the next vital phase is Exploratory Data Analysis (EDA).
+
+EDA involves delving deeper into the training data to uncover patterns, relationships, and insights that can inform our model selection and feature engineering.
+
+This is where we ask questions like:
+
+How are different features distributed? (e.g., histograms)  
+Are there any correlations between features and the median house value? (e.g., correlation matrices, scatter plots)
+How does location (latitude and longitude) influence housing prices? (e.g., geographical plots)
+
+Visualizing geographical data:
+
+```python
+housing = strat_train_set.copy()
+```
+
+```python
+housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
+s=housing["population"]/100, label="population", figsize=(10,7),
+c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True,
+)
+plt.legend()
+```
+
+![png](/assets/img/output_20_1.png)
+
+---
+
+
+
+
+
+
+
+
+
+
+```python
+from pandas.plotting import scatter_matrix
+
+attributes = ["median_house_value", "median_income", "total_rooms", 
+              "housing_median_age"]
+scatter_matrix(housing[attributes], figsize=(12, 8))
+```
+---
+
+##### Unveiling Relationships: Calculating the Correlation Matrix
+
+To gain deeper insights into how different numerical attributes relate to each other within our housing dataset, we employ a powerful tool: the correlation matrix. This matrix quantifies the strength and direction of linear relationships between pairs of numerical features.
+
+The code achieves this in two clear steps:
+
+```python
+numerical_housing = housing.select_dtypes(include=np.number)
+corr_matrix = numerical_housing.corr()
+```
+
+
+
+
+
+1. Selecting Numerical Attributes:
+First, we isolate the numerical columns from our `housing` DataFrame. This is crucial because correlation is only meaningful for numerical data. The select_dtypes(include=np.number) function efficiently filters out any non-numerical columns, creating a new DataFrame called numerical_housing that contains only the numerical features.
+2. Computing the Correlation Matrix:
+Next, we use the `.corr()` method on the `numerical_housing` DataFrame. This method calculates the Pearson correlation coefficient between every pair of numerical columns. The result is stored in the `corr_matrix` variable.
+
+
+
+The resulting `corr_matrix` is a square table where:
+
+```python
+corr_matrix["median_house_value"].sort_values(ascending=False)
+```
+
+```
+    median_house_value    1.000000
+    median_income         0.687151
+    total_rooms           0.135140
+    housing_median_age    0.114146
+    households            0.064590
+    total_bedrooms        0.047781
+    population           -0.026882
+    longitude            -0.047466
+    latitude             -0.142673
+    Name: median_house_value, dtype: float64
+```
+
+**Key Correlations with Median House Value:**
+
+*The Strongest Predictor:* Median Income Reigns Supreme. Looking at the correlation values, `median_income` stands out with a strong positive correlation of approximately 0.69 with `median_house_value`. This suggests a significant relationship: as the median income in a district tends to increase, the median house value in that district also tends to increase considerably. This makes intuitive sense, as affordability plays a crucial role in housing prices.
+
+*Size Matters (Somewhat):* Total Rooms Show a Modest Positive Link. `total_rooms'` exhibits a weak positive correlation of around 0.14 with `median_house_value`. This implies that larger houses (in terms of total rooms) tend to be associated with slightly higher values. However, the correlation isn't very strong, suggesting that other factors likely have a more significant impact on price.
+
+*Age and Value:* A Weak Positive Connection. The `housing_median_age` shows a very weak positive correlation of about 0.11 with `median_house_value`. This suggests a slight tendency for older houses to have somewhat higher values, but this relationship is not very pronounced. There could be various reasons for this, such as the location or the historical significance of older properties."
+
+*Household Dynamics:* A Very Weak Positive Influence. `households` and `total_bedrooms` show very weak positive correlations (around 0.065 and 0.048 respectively) with `median_house_value`. These suggest a minimal direct linear relationship between the number of households or bedrooms and the median house value."
+
+*Location, Location...* Weak Negative Correlations. `longitude` and `latitude` exhibit weak negative correlations (around -0.047 and -0.14 respectively) with `median_house_value`. This implies a slight tendency for houses in certain geographical locations (as defined by these coordinates) to have lower median values. This could be due to various regional economic or environmental factors, but the correlation is not strong."
+
+*Population:* A Negligible Negative Link. The `population` shows a very weak negative correlation (around -0.027) with `median_house_value`, suggesting virtually no linear relationship between the population of a district and its median house value."
+
+Correlation coefficients range from -1 to 1:
+1 indicates a perfect positive linear relationship (as one variable increases, the other increases strongly).
+-1 indicates a perfect negative linear relationship (as one variable increases, the other decreases strongly).
+0 indicates no linear relationship.
+"By examining this corr_matrix, we can identify key relationships, such as the correlation between 'median_income' and 'median_house_value', which can provide valuable insights for our subsequent modeling efforts."
+
+---
+
+Each row and column represents a numerical feature.
+The value at the intersection of a row and a column indicates the correlation coefficient between those two features.
+
+![png](/assets/img/output_23_1.png)
+
+To further explore the relationships between key numerical attributes, we generated a scatter matrix. This visual tool allows us to examine the pairwise relationships between `median_house_value`, `median_income`, `total_rooms`, and `housing_median_age`.
+
+As anticipated from our correlation analysis, the scatter plot between `median_income` and `median_house_value` reveals a clear positive trend, visually confirming that higher incomes are generally associated with higher home values. In contrast, the scatter plots involving `total_rooms` and `housing_median_age` with `median_house_value` show much more scattered patterns, corroborating their weak correlations.
+
+The histograms along the diagonal provide insights into the distribution of each variable. For instance, we can see the right-skewed nature of `median_house`_value and `total_rooms`, as well as the more varied distribution of `housing_median_age`.
+
+Overall, this scatter matrix provides a valuable visual confirmation of the linear relationships we quantified with the correlation matrix, highlighting the importance of `median_income` as a predictor while suggesting that other factors might have more complex or non-linear relationships with housing prices.
