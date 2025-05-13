@@ -6,3 +6,53 @@ css: style.css
 embed-resources: true
 
 ---
+```{python}
+import pandas as pd 
+from data_helpers import load_listings, load_reviews
+
+listings = load_listings()
+reviews = load_reviews()
+```
+
+## High level stats {height="25%"}
+
+```{python}
+#| content: valuebox
+#| title: "Number of Reviews"
+dict(
+  icon = "person",
+  color = "secondary",
+  value = len(listings)
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: "Number of Reviews"
+dict(
+  icon = "person",
+  color = "secondary",
+  value = len(reviews)
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: "Average Review Rating"
+dict(
+  icon = "star-fill",
+  color = "secondary",
+  value = f"{reviews['overall'].mean():.2f}"
+)
+```
+
+## Rows
+
+```{python}
+#| title: "Rental Overview"
+print("hola amigo")
+```
+
+```{python}
+print("hola amigo")
+```
