@@ -244,19 +244,7 @@ plt.title('Count of Customer Churn')
 plt.bar(churn.index, churn.values)
 ```
 
-
-
-
-    <BarContainer object of 2 artists>
-
-
-
-
-    
-![png](output_8_1.png)
-    
-
-
+![png](/assets/img/output_8_1.png)
 
 ```python
 pct_churn = df['Churn'].value_counts(normalize=True)
@@ -277,14 +265,11 @@ plt.pie(pct_churn, labels=pct_churn.index, autopct='%1.1f%%')
 
 
     
-![png](output_9_1.png)
-    
-
+![png](/assets/img/output_9_1.png)
 
 ### Understanding the data that causes churn
 
 #### Numeric Features
-
 
 ```python
 #| column: body-outset-left
@@ -303,7 +288,7 @@ for i, feature in enumerate(numerical_features):
 
 
     
-![png](output_12_0.png)
+![png](/assets/img/output_12_0.png)
     
 
 
@@ -360,7 +345,7 @@ plt.show()
 
 
     
-![png](output_13_0.png)
+![png](/assets/img/output_13_0.png)
     
 
 
@@ -379,7 +364,7 @@ plt.show()
 
 
     
-![png](output_15_0.png)
+![png](/assets/img/output_15_0.png)
     
 
 
@@ -395,7 +380,7 @@ plt.show()
 
 
     
-![png](output_16_0.png)
+![png](/assets/img/output_16_0.png)
     
 
 
@@ -449,7 +434,7 @@ plot_churn_by_tenure(monthly, 'Month-to-month')
 
 
     
-![png](output_18_1.png)
+![png](/assets/img/output_18_1.png)
     
 
 
@@ -470,7 +455,7 @@ plot_churn_by_tenure(one_year, 'One year')
 
 
     
-![png](output_19_1.png)
+![png](/assets/img/output_19_1.png)
     
 
 
@@ -491,7 +476,7 @@ plot_churn_by_tenure(two_year, 'Two year')
 
 
     
-![png](output_20_1.png)
+![png](/assets/img/output_20_1.png)
     
 
 
