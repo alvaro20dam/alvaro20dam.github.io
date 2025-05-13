@@ -1,0 +1,38 @@
+.wrap-text td {
+    white-space: normal !important;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+/* In your Quarto document or a linked CSS file */
+.my-fancy-valuebox {
+    background-color: #f0f8ff;
+    /* Alice Blue */
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #ccc;
+    padding: 15px;
+    text-align: center;
+}
+
+.my-fancy-valuebox .value {
+    font-size: 2.5em;
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.my-fancy-valuebox .title {
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.my-fancy-valuebox .icon i {
+    /* Assuming Quarto uses <i> tags for icons */
+    font-size: 1.5em;
+    color: orange;
+    margin-right: 8px;
+}
+
+.my-fancy-valuebox .subtitle {
+    font-size: 0.9em;
+    color: gray;
+}
