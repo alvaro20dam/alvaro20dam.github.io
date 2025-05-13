@@ -476,7 +476,7 @@ plot_churn_by_tenure(two_year, 'Two year')
 
 
     
-![png](/assets/img/output_20_1.png)
+![png](/assets/img/output_20_12.png)
     
 
 
