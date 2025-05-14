@@ -81,6 +81,195 @@ The following SQL queries were developed to answer specific business questions:
     FROM retail_sales
     WHERE sale_date = '2022-11-05';
     ```
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transactions_id</th>
+      <th>sale_date</th>
+      <th>sale_time</th>
+      <th>customer_id</th>
+      <th>gender</th>
+      <th>age</th>
+      <th>category</th>
+      <th>quantiy</th>
+      <th>price_per_unit</th>
+      <th>cogs</th>
+      <th>total_sale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>180</td>
+      <td>2022-11-05</td>
+      <td>10:47:00</td>
+      <td>117</td>
+      <td>Male</td>
+      <td>41.0</td>
+      <td>Clothing</td>
+      <td>3.0</td>
+      <td>300.0</td>
+      <td>129.00</td>
+      <td>900.0</td>
+    </tr>
+    <tr>
+      <th>190</th>
+      <td>240</td>
+      <td>2022-11-05</td>
+      <td>11:49:00</td>
+      <td>95</td>
+      <td>Female</td>
+      <td>23.0</td>
+      <td>Beauty</td>
+      <td>1.0</td>
+      <td>300.0</td>
+      <td>123.00</td>
+      <td>300.0</td>
+    </tr>
+    <tr>
+      <th>259</th>
+      <td>1256</td>
+      <td>2022-11-05</td>
+      <td>09:58:00</td>
+      <td>29</td>
+      <td>Male</td>
+      <td>23.0</td>
+      <td>Clothing</td>
+      <td>2.0</td>
+      <td>500.0</td>
+      <td>190.00</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>895</th>
+      <td>1587</td>
+      <td>2022-11-05</td>
+      <td>20:06:00</td>
+      <td>140</td>
+      <td>Female</td>
+      <td>40.0</td>
+      <td>Beauty</td>
+      <td>4.0</td>
+      <td>300.0</td>
+      <td>105.00</td>
+      <td>1200.0</td>
+    </tr>
+    <tr>
+      <th>929</th>
+      <td>1819</td>
+      <td>2022-11-05</td>
+      <td>20:44:00</td>
+      <td>83</td>
+      <td>Female</td>
+      <td>35.0</td>
+      <td>Beauty</td>
+      <td>2.0</td>
+      <td>50.0</td>
+      <td>13.50</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1575</th>
+      <td>943</td>
+      <td>2022-11-05</td>
+      <td>19:29:00</td>
+      <td>90</td>
+      <td>Female</td>
+      <td>57.0</td>
+      <td>Clothing</td>
+      <td>4.0</td>
+      <td>300.0</td>
+      <td>318.00</td>
+      <td>1200.0</td>
+    </tr>
+    <tr>
+      <th>1647</th>
+      <td>1896</td>
+      <td>2022-11-05</td>
+      <td>20:19:00</td>
+      <td>87</td>
+      <td>Female</td>
+      <td>30.0</td>
+      <td>Electronics</td>
+      <td>2.0</td>
+      <td>25.0</td>
+      <td>30.75</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>1752</th>
+      <td>1137</td>
+      <td>2022-11-05</td>
+      <td>22:34:00</td>
+      <td>104</td>
+      <td>Male</td>
+      <td>46.0</td>
+      <td>Beauty</td>
+      <td>2.0</td>
+      <td>500.0</td>
+      <td>145.00</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>1794</th>
+      <td>856</td>
+      <td>2022-11-05</td>
+      <td>17:43:00</td>
+      <td>102</td>
+      <td>Male</td>
+      <td>54.0</td>
+      <td>Electronics</td>
+      <td>4.0</td>
+      <td>30.0</td>
+      <td>9.30</td>
+      <td>120.0</td>
+    </tr>
+    <tr>
+      <th>1879</th>
+      <td>214</td>
+      <td>2022-11-05</td>
+      <td>16:31:00</td>
+      <td>53</td>
+      <td>Male</td>
+      <td>20.0</td>
+      <td>Beauty</td>
+      <td>2.0</td>
+      <td>30.0</td>
+      <td>8.10</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1888</th>
+      <td>1265</td>
+      <td>2022-11-05</td>
+      <td>14:35:00</td>
+      <td>86</td>
+      <td>Male</td>
+      <td>55.0</td>
+      <td>Clothing</td>
+      <td>3.0</td>
+      <td>300.0</td>
+      <td>111.00</td>
+      <td>900.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
 
@@ -218,6 +407,8 @@ The following SQL queries were developed to answer specific business questions:
 ## Conclusion
 
 This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.
+
+---
 
 ## How to Use
 
