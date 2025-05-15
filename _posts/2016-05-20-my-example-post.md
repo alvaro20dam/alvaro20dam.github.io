@@ -8,7 +8,7 @@ In this chapter, we’ll mostly use one data set that’s bundled with ggplot2: 
 
 ## mpg data
 
-{% highlight r %}
+```{r}
 data()
 head(mpg)
-{% endhighlight %}
+```
