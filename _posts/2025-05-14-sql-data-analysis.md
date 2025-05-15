@@ -324,6 +324,7 @@ The following SQL queries were developed to answer specific business questions:
     FROM retail_sales
     GROUP BY 1
     ```
+
 | category    | net_sale | total_orders |
 | :---------- | -------: | -----------: |
 | Electronics |   311445 |          678 |
