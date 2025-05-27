@@ -62,8 +62,16 @@ df.info()
 df.head()
 ```
 
-<div>
+<div class="dataframe-container">
+
 <style scoped>
+
+       .dataframe-container {
+        overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
+        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
+        margin-right: auto; /* Adjust right margin if needed */
+    }
+    
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
