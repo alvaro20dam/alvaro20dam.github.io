@@ -1,7 +1,11 @@
-# Telco Churn Analysis
+---
+layout: post
+title: "Telecom Churn Analysis"
+---
+
+Telecom churn analysis is a critical aspect of customer retention in the telecommunications industry, where competition is fierce and customer loyalty can be fleeting. Churn refers to the rate at which customers discontinue their service with a company. For telecom providers, high churn rates directly impact profitability and market share, as acquiring new customers is significantly more expensive than retaining existing ones.
 
 ### Import necessary libraries & load data
-
 
 ```python
 import pandas as pd
@@ -11,7 +15,6 @@ import seaborn as sns
 from pathlib import Path
 ```
 
-
 ```python
 file = Path("__file__").parent / "telco-customer-churn.csv"
 df = pd.read_csv(file)
@@ -20,7 +23,6 @@ df = pd.read_csv(file)
 ```
 
 ## Initial Data Exploration
-
 
 ```python
 df.info()
@@ -56,13 +58,9 @@ df.info()
     memory usage: 1.1+ MB
     
 
-
 ```python
 df.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -231,10 +229,7 @@ df.head()
 <p>5 rows × 21 columns</p>
 </div>
 
-
-
 ### High-level overview of the data
-
 
 ```python
 churn = df['Churn'].value_counts()
@@ -242,47 +237,18 @@ plt.title('Count of Customer Churn')
 plt.bar(churn.index, churn.values)
 ```
 
-
-
-
-    <BarContainer object of 2 artists>
-
-
-
-
-    
 ![png](/assets/img/churn/output_8_1.png)
-    
-
-
 
 ```python
 pct_churn = df['Churn'].value_counts(normalize=True)
 plt.pie(pct_churn, labels=pct_churn.index, autopct='%1.1f%%')
 ```
 
-
-
-
-    ([<matplotlib.patches.Wedge at 0x1c6701b4a10>,
-      <matplotlib.patches.Wedge at 0x1c66fad6240>],
-     [Text(-0.7393678277834757, 0.8144539368428056, 'No'),
-      Text(0.7393677515287918, -0.8144540060674139, 'Yes')],
-     [Text(-0.4032915424273503, 0.44424760191425755, '73.5%'),
-      Text(0.4032915008338864, -0.4442476396731348, '26.5%')])
-
-
-
-
-    
 ![png](/assets/img/churn/output_9_1.png)
-    
-
 
 ### Understanding the data that causes churn
 
 #### Numeric Features
-
 
 ```python
 #| column: body-outset-left
@@ -299,12 +265,7 @@ for i, feature in enumerate(numerical_features):
     axes[i].set_title(f'Distribution of {feature}')
 ```
 
-
-    
 ![png](/assets/img/churn/output_12_0.png)
-    
-
-
 
 ```python
 categorical_features = ['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'PhoneService', 'InternetService', 'Contract']
@@ -356,14 +317,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-
-    
 ![png](/assets/img/churn/output_13_0.png)
-    
-
 
 ### Some more detailed analysis
-
 
 ```python
 
@@ -375,12 +331,7 @@ plt.ylabel('Total Charges')
 plt.show()
 ```
 
-
-    
 ![png](/assets/img/churn/output_15_0.png)
-    
-
-
 
 ```python
 plt.figure(figsize=(10, 6))
@@ -391,12 +342,7 @@ plt.ylabel('Monthly Charges')
 plt.show()
 ```
 
-
-    
 ![png](/assets/img/churn/output_16_0.png)
-    
-
-
 
 ```python
 def plot_churn_by_tenure(data, contract_type):
@@ -430,71 +376,25 @@ one_year = df[df['Contract'] == 'One year']
 two_year = df[df['Contract'] == 'Two year']
 ```
 
-
 ```python
 plot_churn_by_tenure(monthly, 'Month-to-month')
 ```
 
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:4: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      data['tenure_bin'] = pd.cut(data['tenure'], bins=bins)
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:7: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      churn_by_tenure = (data.groupby('tenure_bin')['Churn']
-    
-
-
-    
 ![png](/assets/img/churn/output_18_1.png)
-    
-
-
 
 ```python
 plot_churn_by_tenure(one_year, 'One year')
 ```
 
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:4: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      data['tenure_bin'] = pd.cut(data['tenure'], bins=bins)
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:7: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      churn_by_tenure = (data.groupby('tenure_bin')['Churn']
-    
-
-
-    
 ![png](/assets/img/churn/output_19_1.png)
-    
-
-
 
 ```python
 plot_churn_by_tenure(two_year, 'Two year')  
 ```
 
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:4: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      data['tenure_bin'] = pd.cut(data['tenure'], bins=bins)
-    C:\Users\admin\AppData\Local\Temp\ipykernel_2556\642956251.py:7: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      churn_by_tenure = (data.groupby('tenure_bin')['Churn']
-    
-
-
-    
 ![png](/assets/img/churn/output_20_1.png)
-    
-
 
 ## Model building
-
 
 ```python
 # Prep data
@@ -545,13 +445,9 @@ df.drop(columns=columns_to_drop, inplace=True)
 
 ```
 
-
 ```python
 df.head()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -765,7 +661,6 @@ df.info()
 
 ### Standardize numerical columns
 
-
 ```python
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
@@ -778,7 +673,6 @@ columns_to_scale = ['tenure', 'monthly_charges', 'total_charges']
 # Apply scaling to the selected columns
 df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
 ```
-
 
 ```python
 from sklearn.model_selection import train_test_split
