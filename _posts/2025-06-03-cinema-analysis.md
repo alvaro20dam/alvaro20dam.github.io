@@ -19,7 +19,7 @@ The tickets table serves as the foundation for our customer segmentation and fin
 
 **Here are the key columns and their interpretations:**
 
-```SQL
+```sql
 SELECT * FROM tickets LIMIT 10;
 ```
 
@@ -174,6 +174,7 @@ SELECT * FROM tickets LIMIT 10;
 </table>
 </div>
 
+***
 
 1. `monthly_visits`: This column indicates the average number of times a customer visits the cinema per month. It's a crucial indicator of customer frequency. High monthly_visits suggest a highly engaged customer who might benefit significantly from an annual subscription. It also helps estimate the potential increase in footfall that could lead to more bar sales.
 2. `annual_ticket_expense`: This column represents the total amount of money a customer spends on cinema tickets over a full year. It's a direct measure of a customer's loyalty and engagement with the cinema's core offering. This is the primary metric used for segmenting customers (high vs. low spenders) and is critical for assessing the potential revenue shift with an annual subscription.
