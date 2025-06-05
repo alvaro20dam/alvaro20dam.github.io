@@ -332,5 +332,3 @@ By understanding these fundamental differences, we're well-equipped to start thi
   <tbody>
   
   </tbody>
-</table>
-</div>
