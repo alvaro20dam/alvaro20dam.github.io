@@ -45,6 +45,7 @@ To answer these questions, we turn to our trusty database, specifically our `tic
 Before diving into complex analysis, it’s always wise to take a peek at the raw material. My first SQL command is simple yet essential:
 
 **Here are the key columns and their interpretations:**
+
 ```sql
 SELECT * FROM tickets LIMIT 10;
 ```
@@ -229,25 +230,16 @@ WITH segmented_users AS (
     <tr style="text-align: right;">
       <th>segment</th>
       <th>num_users</th>
-      <th>avg_annual_ticket_expense</th>
-      <th>avg_monthly_visits</th>
-      <th>avg_bar_expense_per_visit</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Segment 1</td>
       <td>847</td>
-      <td>198.9</td>
-      <td>2.07</td>
-      <td>4.11</td>
     </tr>
         <tr>
       <td>Segment 2</td>
       <td>153</td>
-      <td>547.14</td>
-      <td>5.7</td>
-      <td>4.02</td>
     </tr>
   </tbody>
 </table>
