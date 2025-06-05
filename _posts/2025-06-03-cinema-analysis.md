@@ -366,7 +366,7 @@ GROUP BY segment;
 
        .dataframe-container {
         overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
-        max-width: 40%; /* Ensure it doesn't exceed the parent container's width */
+        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
         margin-right: auto; /* Adjust right margin if needed */
     }
 
