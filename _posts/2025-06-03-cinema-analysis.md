@@ -261,26 +261,6 @@ FROM segmented_users
 GROUP BY segment;
 ```
 
-Here's how we're breaking it down:
-
-* We're selecting the `segment` type itself, so we can see the results for each group.
-* `num_users`: This simply counts how many customers fall into each segment. It tells us the size of each audience group.
-* `avg_annual_ticket_expense`: For each segment, we calculate the average amount customers spend on tickets annually. This is crucial for understanding the current value of each segment and for informing how attractive a subscription price might be to them.
-* `avg_monthly_visits`: We then look at the average number of times customers in each segment visit the cinema per month. This helps us gauge their frequency and potential engagement levels.
-* `avg_bar_expense_per_visit`: Finally, we determine the average amount customers in each segment spend at the bar or concession stand during a single visit. This is vital for understanding non-ticket revenue potential.
-
-The `GROUP BY segment` clause ensures that all these average calculations are performed separately for 'Segment 1' and 'Segment 2', giving us distinct profiles for each.
-
-#### Why This Matters for Pricing:
-
-This output is incredibly valuable. It paints a clear picture:
-
-* We can see how many customers we have in each spending tier.
-* We immediately get a sense of their typical annual ticket spend – a direct reference point for our subscription price.
-* Their visit frequency and bar spending habits give us insights into their overall engagement and the potential for secondary revenue gains if they adopt an annual pass.
-
-By understanding these fundamental differences, we're well-equipped to start thinking about a subscription price that appeals to our "Segment 1" by offering perceived savings, and provides continued value (or prevents churn) for our "Segment 2" top spenders. This is the first crucial step in data-driven pricing!
-
 <div class="dataframe-container">
 
 <style scoped>
@@ -304,7 +284,6 @@ By understanding these fundamental differences, we're well-equipped to start thi
     }
 
 </style>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -333,3 +312,23 @@ By understanding these fundamental differences, we're well-equipped to start thi
   </tbody>
 </table>
 </div>
+
+Here's how we're breaking it down:
+
+* We're selecting the `segment` type itself, so we can see the results for each group.
+* `num_users`: This simply counts how many customers fall into each segment. It tells us the size of each audience group.
+* `avg_annual_ticket_expense`: For each segment, we calculate the average amount customers spend on tickets annually. This is crucial for understanding the current value of each segment and for informing how attractive a subscription price might be to them.
+* `avg_monthly_visits`: We then look at the average number of times customers in each segment visit the cinema per month. This helps us gauge their frequency and potential engagement levels.
+* `avg_bar_expense_per_visit`: Finally, we determine the average amount customers in each segment spend at the bar or concession stand during a single visit. This is vital for understanding non-ticket revenue potential.
+
+The `GROUP BY segment` clause ensures that all these average calculations are performed separately for 'Segment 1' and 'Segment 2', giving us distinct profiles for each.
+
+#### Why This Matters for Pricing:
+
+This output is incredibly valuable. It paints a clear picture:
+
+* We can see how many customers we have in each spending tier.
+* We immediately get a sense of their typical annual ticket spend – a direct reference point for our subscription price.
+* Their visit frequency and bar spending habits give us insights into their overall engagement and the potential for secondary revenue gains if they adopt an annual pass.
+
+By understanding these fundamental differences, we're well-equipped to start thinking about a subscription price that appeals to our "Segment 1" by offering perceived savings, and provides continued value (or prevents churn) for our "Segment 2" top spenders. This is the first crucial step in data-driven pricing!
