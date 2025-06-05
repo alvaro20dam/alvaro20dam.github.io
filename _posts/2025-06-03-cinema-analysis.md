@@ -7,7 +7,7 @@ In the dynamic entertainment industry, understanding customer behavior is crucia
 
 ## The Problem / Business Question
 
-The primary goal was to innovate product offerings and generate recurring revenue, by proposing an optimal price for a new annual subscription. Segment customers based on their annual ticket expenditure to identify different consumption profiles and, from there, understand their habits related to monthly visits and bar spending. The key question was: "Based on our customers' current spending habits and visit frequency, what is the optimal pricing strategy for a new annual cinema subscription that offers value to our patrons while generating recurring revenue?"
+The primary goal was to innovate product offerings and generate recurring revenue, by proposing an optimal price for a new annual subscription. Segment customers based on their annual ticket expenditure to identify different consumption profiles and, from there, understand their habits related to monthly visits and bar spending. The key question was: "Based on our customers' current spending habits and visit frequency, what is the optimal pricing strategy for a new **annual cinema subscription** that offers value to our patrons while generating recurring revenue?"
 
 ## Dataset introduction
 
@@ -17,8 +17,34 @@ The core of this analysis relies on a dataset (represented by the tickets table)
 
 The tickets table serves as the foundation for our customer segmentation and financial impact modeling. Each row in this table typically corresponds to a single customer, providing a summarized view of their interactions with the cinema over a period (e.g., a year).
 
-**Here are the key columns and their interpretations:**
 
+
+
+
+
+***
+
+1. `monthly_visits`: This column indicates the average number of times a customer visits the cinema per month. It's a crucial indicator of customer frequency. High monthly_visits suggest a highly engaged customer who might benefit significantly from an annual subscription. It also helps estimate the potential increase in footfall that could lead to more bar sales.
+2. `annual_ticket_expense`: This column represents the total amount of money a customer spends on cinema tickets over a full year. It's a direct measure of a customer's loyalty and engagement with the cinema's core offering. This is the primary metric used for segmenting customers (high vs. low spenders) and is critical for assessing the potential revenue shift with an annual subscription.
+3. `annual_bar_expense`:
+4. `annual_total_expense`:
+5. `bar_expense_per_visit`: This column represents the average amount of money a customer spends at the cinema's bar (or concession stand) during a single visit. This is a vital metric for understanding secondary revenue streams. While the annual subscription might fix ticket revenue, increased visits (driven by the subscription) could directly boost bar sales, which often have higher profit margins.
+6. `monthly_visits_m0`:
+7. `monthly_visits_m6`:
+
+***
+
+### Setting the Stage – Getting to Know Our Audience for the Annual Pass
+
+As we embark on the exciting journey of pricing our brand-new Annual Cinema Subscription, the first crucial step is to truly understand our existing audience. Who are they? How do they engage with our cinema? And, most importantly, how do their spending habits differ?
+
+To answer these questions, we turn to our trusty database, specifically our `tickets` table – the heart of our customer behavior data.
+
+#### The First Glance at Our Data:
+
+Before diving into complex analysis, it’s always wise to take a peek at the raw material. My first SQL command is simple yet essential:
+
+**Here are the key columns and their interpretations:**
 ```sql
 SELECT * FROM tickets LIMIT 10;
 ```
@@ -48,7 +74,6 @@ SELECT * FROM tickets LIMIT 10;
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th></th>
       <th>user_id</th>
       <th>monthly_visits</th>
       <th>annual_ticket_expense</th>
@@ -60,17 +85,6 @@ SELECT * FROM tickets LIMIT 10;
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2.0</td>
-      <td>192.0</td>
-      <td>100.2650</td>
-      <td>292.265</td>
-      <td>4.17770</td>
-      <td>2.0</td>
-      <td>2.0</td>
-    </tr>
     <tr>
       <th>1</th>
       <td>2</td>
@@ -176,32 +190,9 @@ SELECT * FROM tickets LIMIT 10;
 
 ***
 
-1. `monthly_visits`: This column indicates the average number of times a customer visits the cinema per month. It's a crucial indicator of customer frequency. High monthly_visits suggest a highly engaged customer who might benefit significantly from an annual subscription. It also helps estimate the potential increase in footfall that could lead to more bar sales.
-2. `annual_ticket_expense`: This column represents the total amount of money a customer spends on cinema tickets over a full year. It's a direct measure of a customer's loyalty and engagement with the cinema's core offering. This is the primary metric used for segmenting customers (high vs. low spenders) and is critical for assessing the potential revenue shift with an annual subscription.
-3. `annual_bar_expense`:
-4. `annual_total_expense`:
-5. `bar_expense_per_visit`: This column represents the average amount of money a customer spends at the cinema's bar (or concession stand) during a single visit. This is a vital metric for understanding secondary revenue streams. While the annual subscription might fix ticket revenue, increased visits (driven by the subscription) could directly boost bar sales, which often have higher profit margins.
-6. `monthly_visits_m0`:
-7. `monthly_visits_m6`:
+This command opens up our `cinema` database and then asks for a full display of every single customer entry in our `tickets` table. It's like spreading out all our customer files on a big table, getting a feel for the breadth and depth of the information we have. We see columns like `user_id`, `monthly_visits`, `annual_ticket_expense`, `annual_bar_expense`, `annual_total_expense`, and `bar_expense_per_visit` – each a piece of the puzzle about our patrons.
 
-***
 
-### Setting the Stage – Getting to Know Our Audience for the Annual Pass
-
-As we embark on the exciting journey of pricing our brand-new Annual Cinema Subscription, the first crucial step is to truly understand our existing audience. Who are they? How do they engage with our cinema? And, most importantly, how do their spending habits differ?
-
-To answer these questions, we turn to our trusty database, specifically our `tickets` table – the heart of our customer behavior data.
-
-#### The First Glance at Our Data:
-
-Before diving into complex analysis, it’s always wise to take a peek at the raw material. My first SQL command is simple yet essential:
-
-```sql
-USE cinema;
-SELECT * FROM tickets;
-```
-
-This command opens up our `cinema` database and then asks for a full display of every single customer entry in our `tickets` table. It's like spreading out all our customer files on a big table, getting a feel for the breadth and depth of the information we have. We see columns like `user_id`, `monthly_visits`, `annual_ticket_expense`, `annual_bar_expense`, `annual_total_expense``, and `bar_expense_per_visit` – each a piece of the puzzle about our patrons.
 
 #### Defining Our Strategic Boundaries:
 
@@ -402,3 +393,30 @@ GROUP BY segment;
   </tbody>
 </table>
 </div>
+
+***
+
+#### Deconstructing the `annual_ticket_expense` Metric
+
+This part of the query is quite elegant in how it distills complex behavior into a single, telling number for each segment:
+
+1. `AVG(annual_ticket_expense)`: First, for each segment (`Segment 1` and `Segment 2`), we calculate their average annual ticket expenditure. This gives us the typical spending behavior of customers within that group.
+
+2. `/ @P`: We then divide that average annual spending by our `@P` threshold (which is set at **400.0**). This division directly answers: "On average, what percentage of our target subscription price does this segment already spend annually?"
+
+3. `LEAST(..., 1)`: This is the clever part. The `LEAST` function ensures that the result of the division is never greater than 1.
+
+     * If a segment's average spending is, say, $300, and @P is $400, then $300/$400 = 0.75. Their  `avg_incentive` is 0.75.
+    * If a segment's average spending is $500, and @P is $400, then $500/$400 = 1.25. The LEAST(1.25, 1) function caps this at 1.00.
+    * Why cap it at 1? This makes incentivo_medio behave like a "completion rate" or "fit score" towards the subscription price. A value of 1 means, on average, the segment either meets or exceeds the proposed subscription price with their current spending, suggesting a very strong alignment. A value less than 1 indicates they are currently spending less than the proposed price.
+
+4. `ROUND(..., 3)`: Finally, we ROUND the result to three decimal places for clarity and conciseness in our output.
+
+What Does `avg_incentive Tell Us for Pricing`?
+
+When we `GROUP BY segment` and look at the `avg_incentive` for each segment, we gain critical insight:
+
+* For `Segment 1` (**Lower/Medium Spenders**): Their `avg_incentive` will likely be a value less than 1. This tells us, on average, how far below the `@P` threshold their current spending lies. This insight is crucial for understanding the "value proposition" needed for this segment. If their average is, say, 0.50, it means they spend half of what the subscription costs. The annual pass would need to offer substantial perceived value (e.g., unlimited visits, discounts) to bridge that gap and encourage them to increase their spending to `@P`.
+* For `Segment 2` (**Higher Spenders**): Their `avg_incentive` will likely be capped at 1.00. This indicates that, on average, these customers already spend at or above our potential subscription price. For this segment, the annual pass isn't about increasing their spend to reach a threshold, but rather about retention and potentially offering convenience or exclusive benefits to maintain their loyalty and ensure they continue to choose our cinema.
+
+This `avg_incentive` metric is a powerful analytical tool. It quantifies the "gap" or "alignment" between current customer behavior and the proposed annual subscription price, directly informing our strategies for attracting and retaining each segment.
