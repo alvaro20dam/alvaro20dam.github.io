@@ -304,6 +304,7 @@ By understanding these fundamental differences, we're well-equipped to start thi
     }
 
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -329,6 +330,6 @@ By understanding these fundamental differences, we're well-equipped to start thi
       <td>5.7</td>
       <td>4.02</td>
     </tr>
-  <tbody>
-  
   </tbody>
+</table>
+</div>
