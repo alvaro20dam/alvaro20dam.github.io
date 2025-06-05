@@ -313,6 +313,8 @@ GROUP BY segment;
 </table>
 </div>
 
+***
+
 Here's how we're breaking it down:
 
 * We're selecting the `segment` type itself, so we can see the results for each group.
@@ -332,3 +334,75 @@ This output is incredibly valuable. It paints a clear picture:
 * Their visit frequency and bar spending habits give us insights into their overall engagement and the potential for secondary revenue gains if they adopt an annual pass.
 
 By understanding these fundamental differences, we're well-equipped to start thinking about a subscription price that appeals to our "Segment 1" by offering perceived savings, and provides continued value (or prevents churn) for our "Segment 2" top spenders. This is the first crucial step in data-driven pricing!
+
+### Gauging the "Fit" – Understanding Customer Incentive for the Annual Pass
+
+Having segmented our customers and profiled their general spending habits, the next vital step is to understand how well our potential annual subscription price (represented by `@P`) aligns with their current spending. How "ready" are they, on average, for a fixed annual fee? This is where a crucial metric, which I've called `incentivo_medio`, comes into play.
+
+We reuse our established variables and the `segmented_users` framework from our previous analysis:
+
+```sql
+
+WITH segmented_users AS (
+    SELECT *,
+        CASE
+            WHEN annual_ticket_expense < @P THEN 'Segment 1'
+            ELSE 'Segment 2'
+        END AS segment
+    FROM tickets
+)
+
+SELECT
+    segment,
+    ROUND(LEAST(AVG(annual_ticket_expense) / @P, 1), 3) AS avg_incentive
+FROM segmented_users
+GROUP BY segment;
+
+```
+tramo  |incentivo_medio|
+:-------|---------------:|
+Tramo 1|          0.497|
+Tramo 2|            1.0|
+
+<div class="dataframe-container">
+
+<style scoped>
+
+       .dataframe-container {
+        overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
+        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
+        margin-right: auto; /* Adjust right margin if needed */
+    }
+
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>segment</th>
+      <th>avg_incentive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Segment 1</td>
+      <td>847</td>
+    </tr>
+        <tr>
+      <td>Segment 2</td>
+      <td>153</td>
+    </tr>
+  </tbody>
+</table>
+</div>
