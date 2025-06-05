@@ -48,8 +48,17 @@ Before diving into complex analysis, it’s always wise to take a peek at the ra
 ```sql
 SELECT * FROM tickets LIMIT 10;
 ```
-<div>
+
+<div class="dataframe-container">
+
 <style scoped>
+
+       .dataframe-container {
+        overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
+        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
+        margin-right: auto; /* Adjust right margin if needed */
+    }
+
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -192,39 +201,6 @@ WITH segmented_users AS (
 )
 ```
 
-segment  |num_users|avg_annual_ticket_expense|avg_monthly_visits|avg_bar_expense_per_visit|
--------|----------|--------------------------|-----------------------|--------------------------|
-Segment 1|       847|                    198.69|                   2.07|                      4.11|
-Segment 2|       153|                    547.14|                    5.7|                      4.02|
-
-Think of this as establishing our core customer profiles. For every single customer in our `tickets` table, we're performing a simple check:
-
-* If their `annual_ticket_expense` falls below our `@P` threshold of `400.0`, they are gently placed into `Segment 1`. These are our foundational customers, perhaps those who visit occasionally or spend moderately.
-* If their `annual_ticket_expense` is equal to or above `@P`, they join `Segment 2`. These are our higher-value patrons, those who already show significant engagement.
-
-This `segmented_users` CTE doesn't change our original data; it simply creates a temporary, organized view of our customers, each now clearly labeled with their segment type. This setup is fundamental, as it provides the framework for all our subsequent analysis.
-
-***
-
-### Profiling Our Segments – What Do These Groups Look Like?
-
-Once our customers are neatly categorized into `Segment 1` and `Segment 2`, the natural next question is: "What are the typical characteristics of each group?" To answer this, we need to summarize their collective behaviors. This is where our main `SELECT` statement comes in, leveraging the power of aggregation.
-
-#### Summarizing Behavior: The Final SELECT Statement
-
-This final part of the query takes the segmented data and crunches the numbers:
-
-```sql
-SELECT
-    segment,
-    COUNT(*) AS num_users,
-    ROUND(AVG(annual_ticket_expense), 2) AS avg_annual_ticket_expense,
-    ROUND(AVG(monthly_visits), 2) AS avg_monthly_visits,
-    ROUND(AVG(bar_expense_per_visit), 2) AS avg_bar_expense_per_visit
-FROM segmented_users
-GROUP BY segment;
-```
-
 <div class="dataframe-container">
 
 <style scoped>
@@ -276,6 +252,36 @@ GROUP BY segment;
   </tbody>
 </table>
 </div>
+
+Think of this as establishing our core customer profiles. For every single customer in our `tickets` table, we're performing a simple check:
+
+* If their `annual_ticket_expense` falls below our `@P` threshold of `400.0`, they are gently placed into `Segment 1`. These are our foundational customers, perhaps those who visit occasionally or spend moderately.
+* If their `annual_ticket_expense` is equal to or above `@P`, they join `Segment 2`. These are our higher-value patrons, those who already show significant engagement.
+
+This `segmented_users` CTE doesn't change our original data; it simply creates a temporary, organized view of our customers, each now clearly labeled with their segment type. This setup is fundamental, as it provides the framework for all our subsequent analysis.
+
+***
+
+### Profiling Our Segments – What Do These Groups Look Like?
+
+Once our customers are neatly categorized into `Segment 1` and `Segment 2`, the natural next question is: "What are the typical characteristics of each group?" To answer this, we need to summarize their collective behaviors. This is where our main `SELECT` statement comes in, leveraging the power of aggregation.
+
+#### Summarizing Behavior: The Final SELECT Statement
+
+This final part of the query takes the segmented data and crunches the numbers:
+
+```sql
+SELECT
+    segment,
+    COUNT(*) AS num_users,
+    ROUND(AVG(annual_ticket_expense), 2) AS avg_annual_ticket_expense,
+    ROUND(AVG(monthly_visits), 2) AS avg_monthly_visits,
+    ROUND(AVG(bar_expense_per_visit), 2) AS avg_bar_expense_per_visit
+FROM segmented_users
+GROUP BY segment;
+```
+
+
 
 ***
 
