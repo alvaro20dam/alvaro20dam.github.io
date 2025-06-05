@@ -48,17 +48,8 @@ Before diving into complex analysis, it’s always wise to take a peek at the ra
 ```sql
 SELECT * FROM tickets LIMIT 10;
 ```
-
-<div class="dataframe-container">
-
+<div>
 <style scoped>
-
-       .dataframe-container {
-        overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
-        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
-        margin-right: auto; /* Adjust right margin if needed */
-    }
-
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -80,109 +71,88 @@ SELECT * FROM tickets LIMIT 10;
       <th>annual_bar_expense</th>
       <th>annual_total_expense</th>
       <th>bar_expense_per_visit</th>
-      <th>monthly_visits_m0</th>
-      <th>monthly_visits_m6</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <td>1</td>
+      <td>2.0</td>
+      <td>192.0</td>
+      <td>100.2650</td>
+      <td>292.265</td>
+      <td>4.17770</td>
+    </tr>
+    <tr>
       <td>2</td>
       <td>6.0</td>
       <td>576.0</td>
       <td>191.8550</td>
       <td>767.855</td>
       <td>2.66466</td>
-      <td>6.0</td>
-      <td>5.0</td>
     </tr>
     <tr>
-      <th>2</th>
       <td>3</td>
       <td>3.0</td>
       <td>288.0</td>
       <td>157.6870</td>
       <td>445.687</td>
       <td>4.38020</td>
-      <td>3.0</td>
-      <td>4.0</td>
     </tr>
-    <tr>
-      <th>3</th>
+    <tr> 
       <td>4</td>
       <td>3.0</td>
       <td>288.0</td>
       <td>165.9810</td>
       <td>453.981</td>
       <td>4.61059</td>
-      <td>3.0</td>
-      <td>3.0</td>
     </tr>
-    <tr>
-      <th>4</th>
+    <tr>  
       <td>5</td>
       <td>1.0</td>
       <td>96.0</td>
       <td>54.7175</td>
       <td>150.717</td>
       <td>4.55979</td>
-      <td>1.0</td>
-      <td>1.0</td>
     </tr>
-    <tr>
-      <th>5</th>
+    <tr>   
       <td>6</td>
       <td>1.0</td>
       <td>96.0</td>
       <td>60.9694</td>
       <td>156.969</td>
       <td>5.08078</td>
-      <td>1.0</td>
-      <td>1.0</td>
     </tr>
-    <tr>
-      <th>6</th>
+    <tr>  
       <td>7</td>
       <td>1.0</td>
       <td>96.0</td>
       <td>58.0071</td>
       <td>154.007</td>
       <td>4.83392</td>
-      <td>1.0</td>
-      <td>1.0</td>
     </tr>
-    <tr>
-      <th>7</th>
+     <tr>    
       <td>8</td>
       <td>5.0</td>
       <td>480.0</td>
       <td>267.5510</td>
       <td>747.551</td>
       <td>4.45918</td>
-      <td>5.0</td>
-      <td>4.0</td>
     </tr>
-    <tr>
-      <th>8</th>
+    <tr>    
       <td>9</td>
       <td>3.0</td>
       <td>288.0</td>
       <td>141.4740</td>
       <td>429.474</td>
       <td>3.92983</td>
-      <td>3.0</td>
-      <td>4.0</td>
     </tr>
-    <tr>
-      <th>9</th>
+    <tr>    
       <td>10</td>
       <td>3.0</td>
       <td>288.0</td>
       <td>84.2054</td>
       <td>372.205</td>
       <td>2.33904</td>
-      <td>3.0</td>
-      <td>4.0</td>
     </tr>
   </tbody>
 </table>
@@ -192,8 +162,6 @@ SELECT * FROM tickets LIMIT 10;
 
 This command opens up our `cinema` database and then asks for a full display of every single customer entry in our `tickets` table. It's like spreading out all our customer files on a big table, getting a feel for the breadth and depth of the information we have. We see columns like `user_id`, `monthly_visits`, `annual_ticket_expense`, `annual_bar_expense`, `annual_total_expense`, and `bar_expense_per_visit` – each a piece of the puzzle about our patrons.
 
-
-
 #### Defining Our Strategic Boundaries:
 
 ```sql
@@ -201,8 +169,8 @@ SET @P = 400.0;
 SET @R = 1.0;
 ```
 
-Here, `@P` becomes our pivot point – a critical threshold set at `400.0` (perhaps indicating $400 or €400 in annual ticket spending). This number is more than just a figure; it represents our idea of what constitutes a "high-spending" customer, or perhaps even a potential target price for our annual subscription. The `@R` variable, set at 1.0, is currently a placeholder for a future mathematical nuance, ready to influence how we model subscription adoption later on.
-
+Here, `@P` becomes our pivot point – a critical threshold set at `$400.0`. This number is more than just a figure; it represents our idea of what constitutes a "high-spending" customer, or perhaps even a potential target price for our annual subscription. The `@R` variable, set at 1.0, **`is currently a placeholder for a future mathematical nuance, ready to influence how we model subscription adoption later on`**.
+*
 ***
 
 ### Unveiling the Segments – Who Are Our Customers, Really?
@@ -211,7 +179,7 @@ Now that we've glimpsed our data and set our key thresholds, it's time for the m
 
 #### Building Our Customer Segments: The `segmented_users` CTE
 
-Our first CTE, aptly named segmented_users, is all about classifying each individual customer:
+Our first CTE, aptly named `segmented_users`, is all about classifying each individual customer:
 
 ```sql
 WITH segmented_users AS (
@@ -223,6 +191,11 @@ WITH segmented_users AS (
     FROM tickets t
 )
 ```
+
+segment  |num_users|avg_annual_ticket_expense|avg_monthly_visits|avg_bar_expense_per_visit|
+-------|----------|--------------------------|-----------------------|--------------------------|
+Segment 1|       847|                    198.69|                   2.07|                      4.11|
+Segment 2|       153|                    547.14|                    5.7|                      4.02|
 
 Think of this as establishing our core customer profiles. For every single customer in our `tickets` table, we're performing a simple check:
 
