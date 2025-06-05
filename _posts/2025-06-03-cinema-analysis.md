@@ -359,10 +359,6 @@ FROM segmented_users
 GROUP BY segment;
 
 ```
-tramo  |incentivo_medio|
-:-------|---------------:|
-Tramo 1|          0.497|
-Tramo 2|            1.0|
 
 <div class="dataframe-container">
 
@@ -370,7 +366,7 @@ Tramo 2|            1.0|
 
        .dataframe-container {
         overflow-x: auto; /* Add horizontal scroll if the table is wider than the container */
-        max-width: 100%; /* Ensure it doesn't exceed the parent container's width */
+        max-width: 40%; /* Ensure it doesn't exceed the parent container's width */
         margin-right: auto; /* Adjust right margin if needed */
     }
 
@@ -383,7 +379,7 @@ Tramo 2|            1.0|
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: middle;
     }
 
 </style>
@@ -397,11 +393,11 @@ Tramo 2|            1.0|
   <tbody>
     <tr>
       <td>Segment 1</td>
-      <td>847</td>
+      <td>0.497</td>
     </tr>
         <tr>
       <td>Segment 2</td>
-      <td>153</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
