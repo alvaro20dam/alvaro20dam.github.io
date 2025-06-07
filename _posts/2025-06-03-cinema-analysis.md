@@ -180,7 +180,7 @@ SET @R = 1.0;
 ```
 
 Here, `@P` becomes our pivot point – a critical threshold set at `$400.0`. This number is more than just a figure; it represents our idea of what constitutes a "high-spending" customer, or perhaps even a potential target price for our annual subscription. The `@R` variable, set at 1.0, **`is currently a placeholder for a future mathematical nuance, ready to influence how we model subscription adoption later on`**.
-*
+
 ***
 
 ### Unveiling the Segments – Who Are Our Customers, Really?
@@ -245,6 +245,8 @@ WITH segmented_users AS (
 </table>
 </div>
 
+***
+
 Think of this as establishing our core customer profiles. For every single customer in our `tickets` table, we're performing a simple check:
 
 * If their `annual_ticket_expense` falls below our `@P` threshold of `400.0`, they are gently placed into `Segment 1`. These are our foundational customers, perhaps those who visit occasionally or spend moderately.
@@ -299,7 +301,7 @@ By understanding these fundamental differences, we're well-equipped to start thi
 
 ### Gauging the "Fit" – Understanding Customer Incentive for the Annual Pass
 
-Having segmented our customers and profiled their general spending habits, the next vital step is to understand how well our potential annual subscription price (represented by `@P`) aligns with their current spending. How "ready" are they, on average, for a fixed annual fee? This is where a crucial metric, which I've called `incentivo_medio`, comes into play.
+Having segmented our customers and profiled their general spending habits, the next vital step is to understand how well our potential annual subscription price (represented by `@P`) aligns with their current spending. How "ready" are they, on average, for a fixed annual fee? This is where a crucial metric, which I've called `avg_incentive`, comes into play.
 
 We reuse our established variables and the `segmented_users` framework from our previous analysis:
 
@@ -377,7 +379,7 @@ This part of the query is quite elegant in how it distills complex behavior into
 
 3. `LEAST(..., 1)`: This is the clever part. The `LEAST` function ensures that the result of the division is never greater than 1.
 
-     * If a segment's average spending is, say, $300, and @P is $400, then $300/$400 = 0.75. Their  `avg_incentive` is 0.75.
+    * If a segment's average spending is, say, $300, and @P is $400, then $300/$400 = 0.75. Their  `avg_incentive` is 0.75.
     * If a segment's average spending is $500, and @P is $400, then $500/$400 = 1.25. The LEAST(1.25, 1) function caps this at 1.00.
     * Why cap it at 1? This makes incentivo_medio behave like a "completion rate" or "fit score" towards the subscription price. A value of 1 means, on average, the segment either meets or exceeds the proposed subscription price with their current spending, suggesting a very strong alignment. A value less than 1 indicates they are currently spending less than the proposed price.
 
@@ -391,3 +393,102 @@ When we `GROUP BY segment` and look at the `avg_incentive` for each segment, we 
 * For `Segment 2` (**Higher Spenders**): Their `avg_incentive` will likely be capped at 1.00. This indicates that, on average, these customers already spend at or above our potential subscription price. For this segment, the annual pass isn't about increasing their spend to reach a threshold, but rather about retention and potentially offering convenience or exclusive benefits to maintain their loyalty and ensure they continue to choose our cinema.
 
 This `avg_incentive` metric is a powerful analytical tool. It quantifies the "gap" or "alignment" between current customer behavior and the proposed annual subscription price, directly informing our strategies for attracting and retaining each segment.
+
+***
+
+### The Financial Balancing Act – Projecting Ticket Revenue Impact
+
+As we edge closer to setting a price for our annual subscription, one of the most critical questions we must answer is: how will this new product affect our core ticket revenue? Will we gain more from new subscribers than we might lose from converting existing high-spenders? This next piece of our SQL puzzle is designed to give us that crucial insight, calculating what I've termed `impacto_entradas` – the projected impact on ticket revenue for each customer segment.
+
+```sql
+SET @P = 400.0; -- Our potential subscription price/segmentation threshold
+SET @R = 1.0;   -- Our adoption rate sensitivity factor
+```
+
+And we continue to build upon our `usuarios_segmentados` CTE, which has already sorted our customers into Segment 1 (lower-to-medium spenders) and Segment 2 (higher spenders) based on their gasto_entradas_anual (annual ticket expenditure) relative to @P.
+
+Now, for the main event – calculating the `impacto_entradas`:
+
+```sql
+WITH usuarios_segmentados AS (
+    SELECT *,
+        CASE
+            WHEN gasto_entradas_anual < @P THEN 'Tramo 1'
+            ELSE 'Tramo 2'
+        END AS tramo
+    FROM entradas
+)
+
+SELECT
+    tramo,
+    CASE
+        WHEN tramo = 'Tramo 1' THEN COUNT(*) *
+            POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R) *
+            (@P - AVG(gasto_entradas_anual))
+        WHEN tramo = 'Tramo 2' THEN - COUNT(*) *
+            POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R) *
+            (AVG(gasto_entradas_anual) - @P)
+    END AS impacto_entradas
+FROM usuarios_segmentados
+GROUP BY tramo;
+```
+
+#### Understanding `impacto_entradas`: A Tale of Two Segments
+
+This query performs a sophisticated calculation, broken down by our two customer segments, to estimate the financial shift in ticket revenue:
+
+1. **The Common Foundation: Estimated Adopters**
+For both segments, a key component is COUNT(*) * POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R). This is essentially our modeled number of adopters within each segment.
+    * COUNT(*): Represents the total number of users in that segment.
+    * LEAST(AVG(gasto_entradas_anual) / @P, 1): As we explored with incentivo_medio, this calculates how much a segment's average spending aligns with or exceeds our @P threshold (capped at 1.00). This effectively acts as a "fit score".
+    * POW(..., @R): This applies our @R factor (currently 1.0, meaning the adoption rate is directly proportional to the "fit score") to model the percentage of users in that segment we expect to purchase the annual subscription.
+    * Multiplying COUNT(*) by this result gives us the estimated number of customers from that segment who will become annual subscribers.
+
+2. **`Tramo 1` Impact: The Potential Gain**
+
+    * (@P - AVG(gasto_entradas_anual)): For customers in Tramo 1 (those currently spending less than @P), this calculates the difference between the annual subscription price (@P) and what they currently spend on tickets annually. This is a positive value, representing the additional revenue per customer we'd gain if they convert to the subscription.
+    * The total impact for Tramo 1 is positive: It multiplies the estimated number of adopters in this segment by this per-customer gain. This tells us the total projected increase in ticket revenue from converting lower-spending customers into subscribers.
+
+3. **Tramo 2 Impact: The Potential Loss**
+
+      * (AVG(gasto_entradas_anual) - @P): For customers in Tramo 2 (those already spending more than or equal to @P), this calculates the difference between their current higher annual spending and the subscription price (@P). This results in a negative value when multiplied because if these high-spenders switch to the subscription, they will now be paying a fixed @P instead of their higher previous variable spend.
+      * The total impact for Tramo 2 is negative: It multiplies the estimated number of adopters in this segment by this per-customer "loss." This tells us the total projected reduction in ticket revenue from our highest-spending customers if they adopt the annual pass. The negative sign explicitly indicates a revenue cannibalization.
+
+***
+
+#### The Story These Numbers Tell:
+
+| tramo   | impacto_entradas |
+| ------- | ---------------- |
+| Tramo 1 | 84,696.35        |
+| Tramo 2 | -22,512.00       |
+
+(Results from our SQL query, rounded for readability)
+
+Let's unpack these numbers, which are the projected shifts in our annual ticket revenue if we launch the subscription at our `@P` price of 400.0.
+
+1. `Tramo 1`: The Growth Engine (+$84,696.35)
+
+    * For `Tramo 1`, our lower-to-medium spending customers, the impacto_entradas is a significant positive value of $84,696.35.
+    * What this means: This is the projected gain in annual ticket revenue stemming from this segment. It suggests that by offering the annual subscription at 400, we anticipate converting a portion of these customers. These new subscribers, who previously spent less than 400 per year on tickets, will now be contributing the full $400 annually. This represents a substantial increase in predictable revenue from a segment that wasn't previously maximizing their ticket expenditure with us. This is the upside of the subscription model – expanding our revenue base by upgrading casual spenders.
+
+2. Tramo 2: The Cannibalization Factor (-$22,512.00)
+
+    * Conversely, for Tramo 2, our high-spending, most loyal customers, the impacto_entradas is a negative value of -$22,512.00.
+    * What this means: This represents the projected reduction or cannibalization of our annual ticket revenue from this segment. These customers already spend significantly more than 400 per year on tickets. If they opt for the 400 annual subscription, we will now receive a fixed 400 from them, instead of their previous higher variable spending. This is the downside – a trade-off where we sacrifice a portion of our existing high-value revenue for the predictability and loyalty benefits of a subscription model.
+
+**The Net Impact: A Positive Outlook (+62,184.35)**
+To get the full picture, we simply sum the impacts from both segments:
+84,696.35 (from Tramo 1) - 22,512.00 (from Tramo 2) = 62,184.35
+
+This calculation reveals a net positive projected impact on our annual ticket revenue of approximately 62,184.35 if we introduce the subscription at the 400 price point.
+
+**Business Implications and Next Steps**:
+These numbers provide powerful insights for our pricing decision:
+
+* Overall Profitability: At this @P of 400, our model suggests that the gains from converting lower-to-medium spenders significantly outweigh the losses from our highest spenders. This is a very encouraging sign for the direct financial viability of the annual subscription.
+* Strategic Trade-off: While there's a revenue dip from Tramo 2, it's important to remember that the subscription also offers benefits beyond just ticket revenue, such as increased customer loyalty, more predictable cash flow, and (crucially) potentially higher bar sales due to increased visits (which we'll model next!).
+* Validation: This analysis provides a data-driven justification for pursuing the annual subscription at a price point around $400, showing that it could be a net positive for ticket revenue.
+* Further Refinement: These are projections based on our current assumptions (especially the adoption rate model). The next steps would involve deeper analysis, perhaps refining our @R factor, considering the total impact on bar revenue, and eventually, A/B testing different price points in a real-world scenario.
+
+This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
