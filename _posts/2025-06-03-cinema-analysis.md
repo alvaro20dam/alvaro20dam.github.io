@@ -639,4 +639,4 @@ Based on this data-driven financial modeling, the introduction of an annual cine
 
 [Another Link this time in Power BI](https://netorgft6656994-my.sharepoint.com/:u:/g/personal/alexander_grotool_com/EQnTmfqbmvhJvUlJuZkq4s0BjWvC_VImK5iBUlU9MfmyVQ?e=YUpGM8)
 
-![power bi png](/assets/img/cinema/graphic-data.png "A cool boxplot")
+![power bi png](/assets/img/cinema/graphic-data.png)
