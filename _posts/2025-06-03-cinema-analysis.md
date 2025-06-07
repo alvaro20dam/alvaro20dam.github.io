@@ -629,12 +629,14 @@ Total Projected Annual Impact = $62,184.35 + $24,971.80 = $87,156.15
 
 This comprehensive modeling paints a compelling picture:
 
-* **Positive Net Revenue:** At the @P price of \$400, our analysis projects a significant overall positive impact on our annual revenue – approximately \$87,156.15. This strong financial projection makes a powerful case for launching the annual subscription.
+* **Positive Net Revenue:** At the `@P` price of \$400, our analysis projects a significant overall positive impact on our annual revenue – approximately \$87,156.15. This strong financial projection makes a powerful case for launching the annual subscription.
 * **Beyond Tickets:** It underscores that the value of an annual pass isn't just about the direct ticket revenue, but also about its ability to drive foot traffic, increase engagement, and, crucially, boost high-margin secondary sales like those from the bar.
-* **Strategic Growth:** The subscription model acts as a strategic tool to convert occasional visitors into loyal, frequent patrons (Segment 1), while potentially deepening engagement even with our already dedicated audience (Segment 2).
+* **Strategic Growth:** The subscription model acts as a strategic tool to convert occasional visitors into loyal, frequent patrons (`Segment 1`), while potentially deepening engagement even with our already dedicated audience (`Segment 2`).
 
 Based on this data-driven financial modeling, the introduction of an annual cinema subscription at a price point around $400 appears to be a highly viable and potentially very profitable venture for our business. It's a strategic move that leverages our customer data to foster loyalty and unlock new revenue streams.
 
 [Link to Tableau Dashboard](https://public.tableau.com/views/AirBnbNYC_17025892098900/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 [Another Link this time in Power BI](https://netorgft6656994-my.sharepoint.com/:u:/g/personal/alexander_grotool_com/EQnTmfqbmvhJvUlJuZkq4s0BjWvC_VImK5iBUlU9MfmyVQ?e=YUpGM8)
+
+![power bi png](/assets/img/cinema/graphic-data.png "A cool boxplot")
