@@ -496,4 +496,10 @@ This quantitative look at `impacto_entradas` is a cornerstone of our recommendat
 [^1]:footnote probando
 
 $\sum_{k=1}^n$
-$$\sum_{k=1}^n$$
+$$
+\prod_{k=1}^n
+$$
+
+\begin{equation}
+$\prod_{k=1}^n$
+\end{equation}
