@@ -507,3 +507,9 @@ $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \
 ```math
 \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
 ```
+
+Inline math: \(\frac{1}{x^2}\)
+Display math:
+\[
+\sum_{i=1}^{n} x_i = \frac{n(n+1)}{2}
+\]
