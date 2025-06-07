@@ -495,7 +495,7 @@ This quantitative look at `impacto_entradas` is a cornerstone of our recommendat
 
 [^1]:footnote probando
 
-$\sum_{k=1}^n$
+$ \sum_{k=1}^n $
 $$
 \prod_{k=1}^n
 $$
@@ -516,3 +516,42 @@ $$
     \end{array} \right)
 \end{aligned}
 $$
+
+The following is a math block:
+
+$$ 5 + 5 $$
+
+But next comes a paragraph with an inline math statement:
+
+hello \$$ 5 + 5 $$
+If you don’t even want the inline math statement, escape the first two dollar signs:
+
+\$\$ 5 + 5 $$
+
+1. List item one.
++
+List item one continued with a second paragraph followed by an
+Indented block.
++
+.................
+$ ls *.sh
+$ mv *.sh ~/tmp
+$ \prod_{k=1}^n $
+.................
++
+List item continued with a third paragraph.
+
+2. List item two continued with an open block.
++
+--
+This paragraph is part of the preceding list item.
+
+a. This list is nested and does not require explicit item
+continuation.
++
+This paragraph is part of the preceding list item.
+
+b. List item b.
+
+This paragraph belongs to item two of the outer list.
+--
