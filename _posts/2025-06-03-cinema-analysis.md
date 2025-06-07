@@ -634,3 +634,7 @@ This comprehensive modeling paints a compelling picture:
 * **Strategic Growth:** The subscription model acts as a strategic tool to convert occasional visitors into loyal, frequent patrons (Segment 1), while potentially deepening engagement even with our already dedicated audience (Segment 2).
 
 Based on this data-driven financial modeling, the introduction of an annual cinema subscription at a price point around $400 appears to be a highly viable and potentially very profitable venture for our business. It's a strategic move that leverages our customer data to foster loyalty and unlock new revenue streams.
+
+[Link to Tableau Dashboard](https://public.tableau.com/views/AirBnbNYC_17025892098900/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+[Another Link this time in Power BI](https://netorgft6656994-my.sharepoint.com/:u:/g/personal/alexander_grotool_com/EQnTmfqbmvhJvUlJuZkq4s0BjWvC_VImK5iBUlU9MfmyVQ?e=YUpGM8)
