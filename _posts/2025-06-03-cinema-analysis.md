@@ -379,13 +379,13 @@ This part of the query is quite elegant in how it distills complex behavior into
 
 3. `LEAST(..., 1)`: This is the clever part. The `LEAST` function ensures that the result of the division is never greater than 1.
 
-    * If a segment's average spending is, say, $300, and @P is $400, then $300/$400 = 0.75. Their  `avg_incentive` is 0.75.
-    * If a segment's average spending is $500, and @P is $400, then $500/$400 = 1.25. The LEAST(1.25, 1) function caps this at 1.00.
-    * Why cap it at 1? This makes incentivo_medio behave like a "completion rate" or "fit score" towards the subscription price. A value of 1 means, on average, the segment either meets or exceeds the proposed subscription price with their current spending, suggesting a very strong alignment. A value less than 1 indicates they are currently spending less than the proposed price.
+    * If a segment's average spending is, say, $300, and `@P` is $400, then $300/$400 = 0.75. Their  `avg_incentive` is 0.75.
+    * If a segment's average spending is $500, and `@P` is $400, then $500/$400 = 1.25. The `LEAST(1.25, 1)` function caps this at 1.00.
+    * **Why cap it at 1?** This makes `avg_incentive` behave like a "completion rate" or "fit score" towards the subscription price. A value of 1 means, on average, the segment either meets or exceeds the proposed subscription price with their current spending, suggesting a very strong alignment. A value less than 1 indicates they are currently spending less than the proposed price.
 
-4. `ROUND(..., 3)`: Finally, we ROUND the result to three decimal places for clarity and conciseness in our output.
+4. `ROUND(..., 3)`: Finally, we `ROUND` the result to three decimal places for clarity and conciseness in our output.
 
-What Does `avg_incentive Tell Us for Pricing`?
+**What Does `avg_incentive` Tell Us for Pricing?**
 
 When we `GROUP BY segment` and look at the `avg_incentive` for each segment, we gain critical insight:
 
@@ -405,32 +405,32 @@ SET @P = 400.0; -- Our potential subscription price/segmentation threshold
 SET @R = 1.0;   -- Our adoption rate sensitivity factor
 ```
 
-And we continue to build upon our `usuarios_segmentados` CTE, which has already sorted our customers into Segment 1 (lower-to-medium spenders) and Segment 2 (higher spenders) based on their gasto_entradas_anual (annual ticket expenditure) relative to @P.
+And we continue to build upon our `segmented_users` CTE, which has already sorted our customers into `Segment 1` (lower-to-medium spenders) and `Segment 2` (higher spenders) based on their `annual_ticket_expense` relative to `@P`.
 
 Now, for the main event – calculating the `tickets_impact`:
 
 ```sql
-WITH usuarios_segmentados AS (
+WITH segmented_users AS (
     SELECT *,
         CASE
-            WHEN gasto_entradas_anual < @P THEN 'Tramo 1'
-            ELSE 'Tramo 2'
-        END AS tramo
-    FROM entradas
+            WHEN annual_ticket_expense < @P THEN 'Segment 1'
+            ELSE 'Segment 2'
+        END AS segment
+    FROM tickets
 )
 
 SELECT
-    tramo,
+    segment,
     CASE
-        WHEN tramo = 'Tramo 1' THEN COUNT(*) *
-            POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R) *
-            (@P - AVG(gasto_entradas_anual))
-        WHEN tramo = 'Tramo 2' THEN - COUNT(*) *
-            POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R) *
-            (AVG(gasto_entradas_anual) - @P)
+        WHEN segment = 'Segment 1' THEN COUNT(*) *
+            POW(LEAST(AVG(annual_ticket_espense) / @P, 1), @R) *
+            (@P - AVG(annual_ticket_espense))
+        WHEN segment = 'Segment 2' THEN - COUNT(*) *
+            POW(LEAST(AVG(annual_ticket_espense) / @P, 1), @R) *
+            (AVG(annual_ticket_espense) - @P)
     END AS tickets_impact
-FROM usuarios_segmentados
-GROUP BY tramo;
+FROM segmented_users
+GROUP BY segment;
 ```
 
 #### Understanding `tickets_impact`: A Tale of Two Segments
@@ -438,44 +438,44 @@ GROUP BY tramo;
 This query performs a sophisticated calculation, broken down by our two customer segments, to estimate the financial shift in ticket revenue:
 
 1. **The Common Foundation: Estimated Adopters**
-For both segments, a key component is COUNT(*) * POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R). This is essentially our modeled number of adopters within each segment.
+For both segments, a key component is COUNT(*) * POW(LEAST(AVG(annual_ticket_expense) / @P, 1), @R). This is essentially our modeled number of adopters within each segment.
     * `COUNT(*)`: Represents the total number of users in that segment.
-    * `LEAST(AVG(gasto_entradas_anual) / @P, 1)`: As we explored with `incentivo_medio`, this calculates how much a segment's average spending aligns with or exceeds our `@P` threshold (capped at 1.00). This effectively acts as a "fit score".
+    * `LEAST(AVG(annual_ticket_expense) / @P, 1)`: As we explored with `incentivo_medio`, this calculates how much a segment's average spending aligns with or exceeds our `@P` threshold (capped at 1.00). This effectively acts as a "fit score".
     * `POW(..., @R)`: This applies our `@R` factor (currently 1.0, meaning the adoption rate is directly proportional to the "fit score") to model the percentage of users in that segment we expect to purchase the annual subscription.
     * `Multiplying COUNT(*)`: by this result gives us the estimated number of customers from that segment who will become annual subscribers.
 
-2. **`Tramo 1` Impact: The Potential Gain**
+2. **`Segment 1` Impact: The Potential Gain**
 
-    * (`@P` - `AVG(gasto_entradas_anual`)): For customers in Tramo 1 (those currently spending less than @P), this calculates the difference between the annual subscription price (@P) and what they currently spend on tickets annually. This is a positive value, representing the additional revenue per customer we'd gain if they convert to the subscription.
-    * The total impact for Tramo 1 is positive: It multiplies the estimated number of adopters in this segment by this per-customer gain. This tells us the total projected increase in ticket revenue from converting lower-spending customers into subscribers.
+    * (`@P` - `AVG(annual_ticket_expense`)): For customers in `Segment 1` (those currently spending less than `@P`), this calculates the difference between the annual subscription price (`@P`) and what they currently spend on tickets annually. This is a positive value, representing the additional revenue per customer we'd gain if they convert to the subscription.
+    * The total impact for `Segment 1` is positive: It multiplies the estimated number of adopters in this segment by this per-customer gain. This tells us the total projected increase in ticket revenue from converting lower-spending customers into subscribers.
 
-3. **Tramo 2 Impact: The Potential Loss**
+3. **`Segment 2` Impact: The Potential Loss**
 
-      * (AVG(gasto_entradas_anual) - @P): For customers in Tramo 2 (those already spending more than or equal to @P), this calculates the difference between their current higher annual spending and the subscription price (@P). This results in a negative value when multiplied because if these high-spenders switch to the subscription, they will now be paying a fixed @P instead of their higher previous variable spend.
-      * The total impact for Tramo 2 is negative: It multiplies the estimated number of adopters in this segment by this per-customer "loss." This tells us the total projected reduction in ticket revenue from our highest-spending customers if they adopt the annual pass. The negative sign explicitly indicates a revenue cannibalization.
+      * `(AVG(annual_ticket_expense) - @P)`: For customers in `Segment 2` (those already spending more than or equal to @P), this calculates the difference between their current higher annual spending and the subscription price (`@P`). This results in a negative value when multiplied because if these high-spenders switch to the subscription, they will now be paying a fixed `@P` instead of their higher previous variable spend.
+      * The total impact for `Segment 2` is negative: It multiplies the estimated number of adopters in this segment by this per-customer "loss." This tells us the total projected reduction in ticket revenue from our highest-spending customers if they adopt the annual pass. The negative sign explicitly indicates a revenue cannibalization.
 
 ***
 
 #### The Story These Numbers Tell
 
-| segment   | impacto_entradas |
+| segment   | tickets_impact   |
 | --------- | ---------------- |
 | Segment 1 | 84,696.35        |
 | Segment 2 | -22,512.00       |
 
 (Results from our SQL query, rounded for readability)
 
-Let's unpack these numbers, which are the projected shifts in our annual ticket revenue if we launch the subscription at our `@P` price of 400.0.
+Let's unpack these numbers, which are the projected shifts in our annual ticket revenue if we launch the subscription at our `@P` price of $400.0.
 
-1. `Tramo 1`: The Growth Engine (+$84,696.35)
+1. `Segment 1`: The Growth Engine (+$84,696.35)
 
-    * For `Tramo 1`, our lower-to-medium spending customers, the impacto_entradas is a significant positive value of $84,696.35.
+    * For `Segment 1`, our lower-to-medium spending customers, `the tickets_impact` is a significant positive value of $84,696.35.
     * What this means: This is the projected gain in annual ticket revenue stemming from this segment. It suggests that by offering the annual subscription at 400, we anticipate converting a portion of these customers. These new subscribers, who previously spent less than 400 per year on tickets, will now be contributing the full $400 annually. This represents a substantial increase in predictable revenue from a segment that wasn't previously maximizing their ticket expenditure with us. This is the upside of the subscription model – expanding our revenue base by upgrading casual spenders.
 
-2. Tramo 2: The Cannibalization Factor (-$22,512.00)
+2. `Segment 2`: The Cannibalization Factor (-$22,512.00)
 
-    * Conversely, for Tramo 2, our high-spending, most loyal customers, the impacto_entradas is a negative value of -$22,512.00.
-    * What this means: This represents the projected reduction or cannibalization of our annual ticket revenue from this segment. These customers already spend significantly more than 400 per year on tickets. If they opt for the 400 annual subscription, we will now receive a fixed 400 from them, instead of their previous higher variable spending. This is the downside – a trade-off where we sacrifice a portion of our existing high-value revenue for the predictability and loyalty benefits of a subscription model.
+    * Conversely, for `Segment 2`, our high-spending, most loyal customers, the `tickets_impact` is a negative value of -$22,512.00.
+    * What this means: This represents the projected reduction or cannibalization of our annual ticket revenue from this segment. These customers already spend significantly more than $400 per year on tickets. If they opt for the $400 annual subscription, we will now receive a fixed $400 from them, instead of their previous higher variable spending. This is the downside – a trade-off where we sacrifice a portion of our existing high-value revenue for the predictability and loyalty benefits of a subscription model.
 
 **The Net Impact: A Positive Outlook (+62,184.35)**
 To get the full picture, we simply sum the impacts from both segments:
@@ -487,30 +487,150 @@ This calculation reveals a net positive projected impact on our annual ticket re
 These numbers provide powerful insights for our pricing decision:
 
 * Overall Profitability: At this @P of $400, our model suggests that the gains from converting lower-to-medium spenders significantly outweigh the losses from our highest spenders. This is a very encouraging sign for the direct financial viability of the annual subscription.
-* Strategic Trade-off: While there's a revenue dip from Tramo 2, it's important to remember that the subscription also offers benefits beyond just ticket revenue, such as increased customer loyalty, more predictable cash flow, and (crucially) potentially higher bar sales due to increased visits (which we'll model next!).
+* Strategic Trade-off: While there's a revenue dip from Segment 2, it's important to remember that the subscription also offers benefits beyond just ticket revenue, such as increased customer loyalty, more predictable cash flow, and (crucially) potentially higher bar sales due to increased visits (which we'll model next!).
 * Validation: This analysis provides a data-driven justification for pursuing the annual subscription at a price point around $400, showing that it could be a net positive for ticket revenue.
 * Further Refinement: These are projections based on our current assumptions (especially the adoption rate model). The next steps would involve deeper analysis, perhaps refining our @R factor, considering the total impact on bar revenue, and eventually, A/B testing different price points in a real-world scenario.
 
-This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
+This quantitative look at `tickets_impact` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
 
-```python
-import math
-import latexify
+### Unlocking Hidden Value – Projecting Bar Revenue Impact
+
+While the annual subscription directly impacts ticket revenue, its true power often lies in encouraging more frequent visits. More visits mean more opportunities for customers to grab popcorn, drinks, or a snack from our bar – a significant secondary revenue stream for any cinema. Our next SQL query is designed to quantify this "ripple effect," calculating what I've termed `bar_impact`.
+
+We'll continue to use our familiar parameters:
+
+```sql
+SET @P = 400.0; -- Our potential subscription price/segmentation threshold
+SET @R = 1.0;   -- Our adoption rate sensitivity factor
 ```
 
+And, as always, we build upon our `segmented_users` Common Table Expression, which has already sorted our customers into `Segment 1` and `Segment 2` based on their annual ticket expenditure.
 
-```python
-@latexify.function(identifiers={'sigmoid' : 'sigma', 'exp':'e' }, use_math_symbols=True)
-def sigmoid(z):
-    return 1 / 1 + math.exp(-z)
+Here's the powerful query that estimates the `bar_impact`:
+
+```sql
+WITH segmented_users AS (
+    SELECT *,
+        CASE
+            WHEN annual_ticket-expense < @P THEN 'Segment 1'
+            ELSE 'Segment 2'
+        END AS Segment
+    FROM entradas
+)
+
+SELECT
+    Segment,
+    CASE
+        WHEN Segment = 'Segment 1' THEN COUNT(*) *
+            POW(LEAST(AVG(annual_ticket-expense) / @P, 1), @R) *
+            12 * AVG(bar_expense_per_visit)
+        WHEN Segment = 'Segment 2' THEN COUNT(*) *
+            POW(LEAST(AVG(annual_ticket-expense) / @P, 1), @R) *
+            (AVG(monthly_visits * 12) * 0.1) * AVG(bar_expense_per_visit)
+    END AS bar_impact`
+FROM segmented_users
+GROUP BY Segment;
 ```
 
+***
 
-```python
-sigmoid
-```
+#### Understanding `bar_impact`: The Boost from the Bar
 
+This query estimates the total projected change in our annual bar revenue, broken down by how each segment is expected to behave once they become subscribers:
 
+1. **The Common Foundation: Estimated Adopters & Bar Spending Per Visit**
+Just like with ticket impact, the calculation for both segments begins with the modeled number of adopters within each group (COUNT(*) * POW(LEAST(AVG(annual_ticket-expense) / @P, 1), @R)). This part remains consistent, representing the expected number of people from each segment who will buy the annual pass.
+We then multiply this by AVG(bar_expense_per_visit), which is the average amount a customer spends at the bar during a single visit. The key difference here is how we project their total annual visits once they're subscribers.
 
+2. **`Segment 1` Impact: Encouraging More Visits (The Fixed Increase)**
 
-$$ \displaystyle \sigma(z) = \frac{1}{1} + \exp \mathopen{}\left( -z \mathclose{}\right) $$
+    * `12 * AVG(bar_expense_per_visit)`: For our `Segment 1` customers (the lower-to-medium spenders who are less frequent visitors), the model assumes that once they buy an annual subscription, they will significantly increase their visits to a base of 12 times a year (representing an average of once a month). This is a strong assumption, but it's a common goal for subscription models: to boost engagement and frequency from this segment.
+    * The total impact for `Segment 1` is positive: It multiplies the estimated number of `Segment 1` adopters by their bar spending per visit, projected over 12 annual visits. This quantifies the anticipated increase in bar revenue from a segment that will now likely visit more often.
+
+3. **`Segment 2` Impact: Nudging Already Frequent Visitors (The Proportional Increase)**
+
+    * (AVG(`monthly_visits` $* 12) * 0.1) * $AVG(`bar_expense_per_visit`): For `Segment 2` customers (our existing high-frequency visitors), we apply a more nuanced approach. We take their existing AVG(`monthly_visits`), annualize it (* 12), and then multiply it by a 0.1 (or 10%) factor.
+    * What this 0.1 means: This implies that even for our already frequent visitors, the unlimited access offered by the annual subscription might lead to a modest increase (e.g., 10%) in their annual visits. Even a small proportional increase from a high base of visits can translate into significant additional bar sales.
+    * The total impact for `Segment 2` is positive: It multiplies the estimated number of `Segment 2` adopters by their average bar spending per visit, applied to their (slightly increased) projected annual visits.
+
+#### Why This Matters for Pricing
+
+The `bar_impact` calculation is absolutely crucial because:
+
+* **Holistic Profitability**: It reminds us that ticket sales are only one part of the revenue equation. Bar sales often boast higher profit margins, and a subscription that drives foot traffic can significantly boost overall profitability, even if ticket revenue changes.
+* **True Value of Subscription**: For `Segment 1`, the subscription's value is not just in ticket access, but in encouraging a new habit of visiting and spending more at our concessions. For `Segment 2`, it's about capitalizing on their existing loyalty and converting small increases in visits into substantial additional bar revenue.
+* **Informing the Price**: The combined `tickets_impact` and `bar_impact` will give us the full picture of the projected financial health of our annual subscription at our chosen price point. A price might result in a slight ticket revenue loss from Segment 2 but be more than offset by significant gains in bar revenue across both segments.
+
+This detailed projection of bar revenue highlights the interconnectedness of our cinema's revenue streams and provides essential context for making an informed, profit-maximizing decision on the annual subscription price.
+
+#### The Sweet Spot – Boosting Bar Revenue and Finding Overall Profitability
+
+We've explored the direct ticket revenue impact of our proposed annual subscription, noting potential gains from `Segment 1` (lower spenders) and potential losses from `Segment 2` (high spenders). But for a cinema, tickets are only part of the story. The bar and concession stand are crucial revenue drivers, and a subscription that encourages more frequent visits can significantly boost these sales.
+
+Our latest SQL query, which calculates ``bar_impact``, provides us with these vital projections.
+
+Here's what the results look like:
+
+| segment   | bar_impact  |
+| --------- | ----------- |
+| Segment 1 |   20,769.42 |
+| Segment 2 |    4,202.38 |
+
+Alright, let's bring our financial modeling to a thrilling conclusion by examining the projected impact on our highly valuable bar revenue! This is where the magic of encouraging more visits through an annual subscription truly shines.
+
+Chapter 7: The Sweet Spot – Boosting Bar Revenue and Finding Overall Profitability
+We've explored the direct ticket revenue impact of our proposed annual subscription, noting potential gains from Segment 1 (lower spenders) and potential losses from Segment 2 (high spenders). But for a cinema, tickets are only part of the story. The bar and concession stand are crucial revenue drivers, and a subscription that encourages more frequent visits can significantly boost these sales.
+
+Our latest SQL query, which calculates `bar_impact`, provides us with these vital projections.
+
+Here's what the results look like:
+
+| Segment   | bar_impact |
+| --------- | ---------- |
+| Segment 1 |  20,769.42 |
+| Segment 2 |   4,202.38 |
+
+(Results from our SQL query, as shown in the image, rounded for readability)
+
+Let's interpret these positive figures and understand the powerful story they tell about our new annual pass.
+
+#### Understanding the Bar's Contribution
+
+1. **`Segment 1`: The New Bar Enthusiasts (+$20,769.42)**
+
+    * For `Segment 1`, our lower-to-medium spending customers, the `bar_impact` is a healthy positive $20,769.42.
+    * What this means: This projected gain arises from the assumption that these new subscribers, once they have "free" tickets, will increase their visit frequency (e.g., to an average of 12 times a year). Each of those increased visits is an opportunity for them to spend at the bar, adding significant new revenue that wasn't there before. This is a direct benefit of the subscription enticing them to engage more deeply with our entire cinema experience.
+
+2. **`Segment 2`: Leveraging Existing Loyalty (+$4,202.38)**
+
+    * For `Segment 2`, our already high-frequency and high-spending customers, the `bar_impact` is also a positive $4,202.38.
+    * What this means: While these customers are already frequent visitors, our model (with the 10% visit increase factor) suggests that the unlimited access of the subscription might nudge them to visit just a little bit more often. Even a small proportional increase from an already high base of visits, combined with their consistent bar spending per visit, translates into a valuable boost to our bar revenue. It's about maximizing the value from our most loyal patrons.
+
+#### The Combined Force: Unlocking Overall Profitability
+
+| segment   | tickets_impact | bar_impact  | total_impact |
+| --------- | -------------- | ----------- | ------------ |
+| Segment 1 |      84,696.35 |  20,769.42  |   105,465.77 |
+| Segment 2 |     -22,512.00 |   4,202.38  |   -18,309.62 |
+|-----------|----------------|-------------|--------------|
+| **TOTAL** |  **62,184.35** |**24,971.79**|**87,156.14** |
+
+When we combine these bar revenue gains:
+\$20,769.42 (from Segment 1) + $4,202.38 (from Segment 2) = **\$24,971.80**
+
+This shows a net positive projected impact on our annual bar revenue of approximately $24,971.80 if we introduce the subscription at the \$400 price point.
+
+Now, let's put it all together. From our previous analysis, we saw a net positive impact on ticket revenue of approximately $62,184.35. Adding the bar impact:
+
+Total Projected Annual Impact = Ticket Impact + Bar Impact
+Total Projected Annual Impact = $62,184.35 + $24,971.80 = $87,156.15
+
+#### The Grand Conclusion: A Strong Case for the Annual Subscription
+
+This comprehensive modeling paints a compelling picture:
+
+* **Positive Net Revenue:** At the @P price of \$400, our analysis projects a significant overall positive impact on our annual revenue – approximately \$87,156.15. This strong financial projection makes a powerful case for launching the annual subscription.
+* **Beyond Tickets:** It underscores that the value of an annual pass isn't just about the direct ticket revenue, but also about its ability to drive foot traffic, increase engagement, and, crucially, boost high-margin secondary sales like those from the bar.
+* **Strategic Growth:** The subscription model acts as a strategic tool to convert occasional visitors into loyal, frequent patrons (Segment 1), while potentially deepening engagement even with our already dedicated audience (Segment 2).
+
+Based on this data-driven financial modeling, the introduction of an annual cinema subscription at a price point around $400 appears to be a highly viable and potentially very profitable venture for our business. It's a strategic move that leverages our customer data to foster loyalty and unlock new revenue streams.
