@@ -398,7 +398,7 @@ This `avg_incentive` metric is a powerful analytical tool. It quantifies the "ga
 
 ### The Financial Balancing Act – Projecting Ticket Revenue Impact
 
-As we edge closer to setting a price for our annual subscription, one of the most critical questions we must answer is: how will this new product affect our core ticket revenue? Will we gain more from new subscribers than we might lose from converting existing high-spenders? This next piece of our SQL puzzle is designed to give us that crucial insight, calculating what I've termed `impacto_entradas` – the projected impact on ticket revenue for each customer segment.
+As we edge closer to setting a price for our annual subscription, one of the most critical questions we must answer is: how will this new product affect our core ticket revenue? Will we gain more from new subscribers than we might lose from converting existing high-spenders? This next piece of our SQL puzzle is designed to give us that crucial insight, calculating what I've termed `tickets_impact` – the projected impact on ticket revenue for each customer segment.
 
 ```sql
 SET @P = 400.0; -- Our potential subscription price/segmentation threshold
@@ -407,7 +407,7 @@ SET @R = 1.0;   -- Our adoption rate sensitivity factor
 
 And we continue to build upon our `usuarios_segmentados` CTE, which has already sorted our customers into Segment 1 (lower-to-medium spenders) and Segment 2 (higher spenders) based on their gasto_entradas_anual (annual ticket expenditure) relative to @P.
 
-Now, for the main event – calculating the `impacto_entradas`:
+Now, for the main event – calculating the `tickets_impact`:
 
 ```sql
 WITH usuarios_segmentados AS (
@@ -428,25 +428,25 @@ SELECT
         WHEN tramo = 'Tramo 2' THEN - COUNT(*) *
             POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R) *
             (AVG(gasto_entradas_anual) - @P)
-    END AS impacto_entradas
+    END AS tickets_impact
 FROM usuarios_segmentados
 GROUP BY tramo;
 ```
 
-#### Understanding `impacto_entradas`: A Tale of Two Segments
+#### Understanding `tickets_impact`: A Tale of Two Segments
 
 This query performs a sophisticated calculation, broken down by our two customer segments, to estimate the financial shift in ticket revenue:
 
 1. **The Common Foundation: Estimated Adopters**
 For both segments, a key component is COUNT(*) * POW(LEAST(AVG(gasto_entradas_anual) / @P, 1), @R). This is essentially our modeled number of adopters within each segment.
-    * COUNT(*): Represents the total number of users in that segment.
-    * LEAST(AVG(gasto_entradas_anual) / @P, 1): As we explored with incentivo_medio, this calculates how much a segment's average spending aligns with or exceeds our @P threshold (capped at 1.00). This effectively acts as a "fit score".
-    * POW(..., @R): This applies our @R factor (currently 1.0, meaning the adoption rate is directly proportional to the "fit score") to model the percentage of users in that segment we expect to purchase the annual subscription.
-    * Multiplying COUNT(*) by this result gives us the estimated number of customers from that segment who will become annual subscribers.
+    * `COUNT(*)`: Represents the total number of users in that segment.
+    * `LEAST(AVG(gasto_entradas_anual) / @P, 1)`: As we explored with `incentivo_medio`, this calculates how much a segment's average spending aligns with or exceeds our `@P` threshold (capped at 1.00). This effectively acts as a "fit score".
+    * `POW(..., @R)`: This applies our `@R` factor (currently 1.0, meaning the adoption rate is directly proportional to the "fit score") to model the percentage of users in that segment we expect to purchase the annual subscription.
+    * `Multiplying COUNT(*)`: by this result gives us the estimated number of customers from that segment who will become annual subscribers.
 
 2. **`Tramo 1` Impact: The Potential Gain**
 
-    * (@P - AVG(gasto_entradas_anual)): For customers in Tramo 1 (those currently spending less than @P), this calculates the difference between the annual subscription price (@P) and what they currently spend on tickets annually. This is a positive value, representing the additional revenue per customer we'd gain if they convert to the subscription.
+    * (`@P` - `AVG(gasto_entradas_anual`)): For customers in Tramo 1 (those currently spending less than @P), this calculates the difference between the annual subscription price (@P) and what they currently spend on tickets annually. This is a positive value, representing the additional revenue per customer we'd gain if they convert to the subscription.
     * The total impact for Tramo 1 is positive: It multiplies the estimated number of adopters in this segment by this per-customer gain. This tells us the total projected increase in ticket revenue from converting lower-spending customers into subscribers.
 
 3. **Tramo 2 Impact: The Potential Loss**
@@ -456,7 +456,7 @@ For both segments, a key component is COUNT(*) * POW(LEAST(AVG(gasto_entradas_an
 
 ***
 
-#### The Story These Numbers Tell:
+#### The Story These Numbers Tell
 
 | segment   | impacto_entradas |
 | --------- | ---------------- |
@@ -491,25 +491,26 @@ These numbers provide powerful insights for our pricing decision:
 * Validation: This analysis provides a data-driven justification for pursuing the annual subscription at a price point around $400, showing that it could be a net positive for ticket revenue.
 * Further Refinement: These are projections based on our current assumptions (especially the adoption rate model). The next steps would involve deeper analysis, perhaps refining our @R factor, considering the total impact on bar revenue, and eventually, A/B testing different price points in a real-world scenario.
 
-This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.[^1]
+This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
 
-[^1]:footnote probando
-
-This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
-
-This sentence uses $\` and \`$ delimiters to show math inline: $`\sqrt{3x-1}+(1+x)^2`$
-
-**The Cauchy-Schwarz Inequality**\
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
-
-**The Cauchy-Schwarz Inequality**
-
-```math
-\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+```python
+import math
+import latexify
 ```
 
-Inline math: \(\frac{1}{x^2}\)
-Display math:
-\[
-\sum_{i=1}^{n} x_i = \frac{n(n+1)}{2}
-\]
+
+```python
+@latexify.function(identifiers={'sigmoid' : 'sigma', 'exp':'e' }, use_math_symbols=True)
+def sigmoid(z):
+    return 1 / 1 + math.exp(-z)
+```
+
+
+```python
+sigmoid
+```
+
+
+
+
+$$ \displaystyle \sigma(z) = \frac{1}{1} + \exp \mathopen{}\left( -z \mathclose{}\right) $$
