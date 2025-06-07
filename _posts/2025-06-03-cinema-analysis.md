@@ -458,10 +458,10 @@ For both segments, a key component is COUNT(*) * POW(LEAST(AVG(gasto_entradas_an
 
 #### The Story These Numbers Tell:
 
-| tramo   | impacto_entradas |
-| ------- | ---------------- |
-| Tramo 1 | 84,696.35        |
-| Tramo 2 | -22,512.00       |
+| segment   | impacto_entradas |
+| --------- | ---------------- |
+| Segment 1 | 84,696.35        |
+| Segment 2 | -22,512.00       |
 
 (Results from our SQL query, rounded for readability)
 
@@ -479,16 +479,19 @@ Let's unpack these numbers, which are the projected shifts in our annual ticket 
 
 **The Net Impact: A Positive Outlook (+62,184.35)**
 To get the full picture, we simply sum the impacts from both segments:
-84,696.35 (from Tramo 1) - 22,512.00 (from Tramo 2) = 62,184.35
+$$84,696.35 (Segment 1) - 22,512.00 (Segment 2) = 62,184.35$$
 
 This calculation reveals a net positive projected impact on our annual ticket revenue of approximately 62,184.35 if we introduce the subscription at the 400 price point.
 
 **Business Implications and Next Steps**:
 These numbers provide powerful insights for our pricing decision:
 
-* Overall Profitability: At this @P of 400, our model suggests that the gains from converting lower-to-medium spenders significantly outweigh the losses from our highest spenders. This is a very encouraging sign for the direct financial viability of the annual subscription.
+* Overall Profitability: At this @P of {$400}, our model suggests that the gains from converting lower-to-medium spenders significantly outweigh the losses from our highest spenders. This is a very encouraging sign for the direct financial viability of the annual subscription.
 * Strategic Trade-off: While there's a revenue dip from Tramo 2, it's important to remember that the subscription also offers benefits beyond just ticket revenue, such as increased customer loyalty, more predictable cash flow, and (crucially) potentially higher bar sales due to increased visits (which we'll model next!).
 * Validation: This analysis provides a data-driven justification for pursuing the annual subscription at a price point around $400, showing that it could be a net positive for ticket revenue.
 * Further Refinement: These are projections based on our current assumptions (especially the adoption rate model). The next steps would involve deeper analysis, perhaps refining our @R factor, considering the total impact on bar revenue, and eventually, A/B testing different price points in a real-world scenario.
 
 This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
+
+$$M^{x-1}$$
+$\sum_{k=1}^n$
