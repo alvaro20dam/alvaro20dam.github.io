@@ -2,6 +2,8 @@ title: a_data_trip
 author:
   name: alvaro20dam
   email: alvaro20dam@hotmail.com
+mathjax: true
+
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
