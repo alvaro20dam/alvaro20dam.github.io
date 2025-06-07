@@ -493,4 +493,4 @@ These numbers provide powerful insights for our pricing decision:
 
 This quantitative look at `impacto_entradas` is a cornerstone of our recommendation, providing solid financial grounding for our strategic move.
 
-$\sum_{k=1}^n$
+\sum_{k=1}^n\
