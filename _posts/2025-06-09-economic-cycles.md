@@ -8,9 +8,6 @@ author:
 meta: "Regression"
 ---
 
-
-### Introduction
-
 In economics, many phenomena don't follow simple linear trends. Business cycles, technology adoption, or even product life cycles often exhibit periods of acceleration, deceleration, and inflection points. This notebook demonstrates how Polynomial Regression can more accurately capture these complex, non-linear relationships compared to traditional linear regression, providing a more nuanced understanding for forecasting and strategic planning.
 
 ### Import Libraries
