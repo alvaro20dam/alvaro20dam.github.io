@@ -39,8 +39,8 @@ tags:
 ### Professional Experience
 
 * Format: Reverse chronological order (most recent first).
-  * [Job Title] | [Company Name], [City, Country]
-  * [Start Date] – [End Date] (or Present)
+  * [Job Title] - [Company Name], [City, Country]
+  * [Start Date] - [End Date] (or Present)
 * Bullet Points: 3-5 strong, results-oriented bullet points per role.
   * Start with an action verb.
   * Quantify the achievement.
@@ -58,7 +58,7 @@ tags:
 
 * Purpose: Highlight your academic background.
 * Format: Reverse chronological order.
-  * [Degree Name] | [Major/Specialization]
+  * [Degree Name] - [Major/Specialization]
   * [University Name], [City, Country]
   * [Graduation Date] (or Expected Graduation Date)
 * Optional: GPA (if high, e.g., 3.5+), relevant coursework (e.g., Econometrics, Advanced Statistics, Machine Learning, Data Mining), thesis title (if relevant).
@@ -68,14 +68,14 @@ tags:
 * Projects (Crucial for demonstrating skills)
 * Purpose: If you have personal projects, Kaggle competitions, or significant academic projects, this is where you shine. Especially useful if you have limited professional experience.
 * Format:
-  * [Project Title] | [Technologies Used: Python, R, SQL, Tableau, etc.]
+  * [Project Title] - [Technologies Used: Python, R, SQL, Tableau, etc.]
   * Brief description (1-2 sentences) of the project's objective and your role.
   * Bullet points detailing your approach, methodologies, and quantitative results.
 * Examples:
-  * "Predictive Analytics for Customer Lifetime Value (CLV)" | Python (Pandas, Scikit-learn), SQL
+  * "Predictive Analytics for Customer Lifetime Value (CLV)" - Python (Pandas, Scikit-learn), SQL
     * Developed a regression model to estimate CLV using transaction data, achieving an RMSE of X.
     * Identified key customer segments for targeted marketing campaigns, demonstrating potential for 20% increase in CLV.
-  * "Economic Impact Analysis of Sports Events" | R (dplyr, ggplot2), Excel
+  * "Economic Impact Analysis of Sports Events" - R (dplyr, ggplot2), Excel
     * Conducted a quantitative analysis to estimate the local economic impact of a major sports event, using input-output models.
     * Presented findings to local government officials, informing future tourism and event strategies.
 
@@ -85,6 +85,7 @@ tags:
 * Examples: Google Data Analytics Certificate, IBM Data Science Professional Certificate, specific Coursera/Udemy courses in ML/Econometrics, AWS/Azure certifications.
 
 ### Publications / Presentations (Optional)
+
 If you have any academic papers, blog posts, or presentations, list them here.
 
 <!-- ### Footer
