@@ -18,11 +18,6 @@ tags:
 
   Highly analytical and results-oriented Economist with **20+ years** of experience leveraging data science methodologies to drive informed decision-making. Proficient in `Python`, `R`, `SQL`, and `Tableau` for end-to-end data collection, analysis, and visualization, adept at crafting sophisticated AI prompts to unlock advanced analytical capabilities. Proven ability to apply machine learning techniques to solve real-world problems across diverse domains including healthcare, e-commerce, sports, human resources, and social media, dedicated to transforming complex data into clear, actionable insights.
 
-<div id="webaddress">
-<a href="alvaro20dam@hotmail.com">alvaro20dam@hotmail.com</a>
-
-</div>
-
 [alvaro20dam@hotmail.com](alvaro20dam@hotmail.com)
 
 ---
@@ -106,7 +101,7 @@ June 2008 – December 2009
 
 ---
 
-### Projects 
+### Projects
 
 * Projects (Crucial for demonstrating skills)
 * Purpose: If you have personal projects, Kaggle competitions, or significant academic projects, this is where you shine. Especially useful if you have limited professional experience.
