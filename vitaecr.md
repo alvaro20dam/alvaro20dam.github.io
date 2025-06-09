@@ -92,17 +92,31 @@ June 2008 – December 2009
 
 ### Education
 
+**Economist @ Universidad de Carabobo**, [Valencia, Venezuela]
+Graduated: July 2007
+
+**Key Coursework**: Econometrics, Macroeconomics, Microeconomics, Statistical Analysis, Public Finance, Economic Modeling.
+
+**Google Data Analytics Professional Certificate | Coursera**, [Online]
+Completed: April 2021
+
+* Developed expertise in end-to-end data analysis workflows, including data collection, cleaning, transformation, analysis, and visualization.
+* Focused on designing data-driven strategies for business decision-making, emphasizing actionable insights and effective communication of findings.
+* Key Skills Acquired: Data Cleaning (SQL, Spreadsheets), Data Analysis (SQL, R, Spreadsheets), Data Visualization (Tableau, Google Looker Studio), Statistical Analysis, Hypothesis Testing, Data Storytelling.
+
+<!--
 * Purpose: Highlight your academic background.
 * Format: Reverse chronological order.
   * [Degree Name] - [Major/Specialization]
   * [University Name], [City, Country]
   * [Graduation Date] (or Expected Graduation Date)
-* Optional: GPA (if high, e.g., 3.5+), relevant coursework (e.g., Econometrics, Advanced Statistics, Machine Learning, Data Mining), thesis title (if relevant).
+* Optional: GPA (if high, e.g., 3.5+), relevant coursework (e.g., Econometrics, Advanced Statistics, Machine Learning, Data Mining), thesis title (if relevant). -->
 
 ---
 
 ### Projects
 
+<!--
 * Projects (Crucial for demonstrating skills)
 * Purpose: If you have personal projects, Kaggle competitions, or significant academic projects, this is where you shine. Especially useful if you have limited professional experience.
 * Format:
@@ -115,14 +129,15 @@ June 2008 – December 2009
     * Identified key customer segments for targeted marketing campaigns, demonstrating potential for 20% increase in CLV.
   * "Economic Impact Analysis of Sports Events" - R (dplyr, ggplot2), Excel
     * Conducted a quantitative analysis to estimate the local economic impact of a major sports event, using input-output models.
-    * Presented findings to local government officials, informing future tourism and event strategies.
+    * Presented findings to local government officials, informing future tourism and event strategies. -->
 
 ---
 
 ### Certifications / Courses
 
+<!--
 * Purpose: Show continuous learning and specialized knowledge.
-* Examples: Google Data Analytics Certificate, IBM Data Science Professional Certificate, specific Coursera/Udemy courses in ML/Econometrics, AWS/Azure certifications.
+* Examples: Google Data Analytics Certificate, IBM Data Science Professional Certificate, specific Coursera/Udemy courses in ML/Econometrics, AWS/Azure certifications. -->
 
 ---
 
