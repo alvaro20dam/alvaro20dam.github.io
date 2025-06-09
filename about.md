@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Alvaro González Driving Insights from Data to Shape Economic Futures
+title: About
 permalink: /about/
 ---
 
@@ -17,16 +17,3 @@ Whether optimizing resources, calculating national economic indicators, or advis
 Through this blog, I aim to share insights, explore innovative data-driven solutions, and discuss the intersection of economics and cutting-edge technology. Let's connect and explore how robust data analysis can illuminate pathways to more informed decisions and a more prosperous future.
 
 ### Thank you for visiting my webpage, and I hope you enjoy it
-
----
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-[jekyll-organization]: https://github.com/jekyll
