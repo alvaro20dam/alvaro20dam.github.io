@@ -14,78 +14,79 @@ tags:
 
 ---
 
-  I'm an economist, with a passion for finding insights from data and communicating them effectively.
-  I have experience in various domains, such as healthcare, e-commerce, sports, and social media. I use Python, R, SQL, Excell, Tableau and other tools to collect, clean, analyze,  and visualize data. I also apply machine learning techniques to build predictive models and solve real-world problems.
+### Professional Summary / Executive Summary
+
+  Highly analytical and results-oriented Economist with **20+ years** of experience leveraging data science methodologies to drive informed decision-making. Proficient in `Python`, `R`, `SQL`, and `Tableau` for end-to-end data collection, analysis, and visualization, adept at crafting sophisticated AI prompts to unlock advanced analytical capabilities. Proven ability to apply machine learning techniques to solve real-world problems across diverse domains including healthcare, e-commerce, sports, human resources, and social media, dedicated to transforming complex data into clear, actionable insights.
 
 <div id="webaddress">
 <a href="alvaro20dam@hotmail.com">alvaro20dam@hotmail.com</a>
-| <a href="http://en.wikipedia.org/wiki/Isaac_Newton">My wikipedia page</a>
+
 </div>
 
-## Currently
+[alvaro20dam@hotmail.com](alvaro20dam@hotmail.com)
 
-Standing on the shoulders of giants
+### Core Competencies / Technical Skills
 
-### Specialized in
+* **Programming Languages**: `Python` (Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn), `R` (dplyr, ggplot2, tidyr), `SQL`
+* **Data Analysis & Visualization**: `Tableau`, `Excel` (Advanced Functions, VBA, Pivot Tables), `Power BI`
+* **Machine Learning**: Supervised/Unsupervised Learning, Regression, Classification, Time Series Analysis, NLP (if applicable), Model Evaluation, Feature Engineering
+* **Statistical Analysis**: Econometrics, Hypothesis Testing, A/B Testing, Regression Analysis, Causal Inference
+* **Database Management**: SQL Server, PostgreSQL, MySQL
+* **Other Tools**: Git, Jupyter Notebooks, VS Code, DBeaver
+* **Domain Knowledge**: Healthcare Economics, E-commerce Analytics, Sports Analytics, Social Media Metrics, Human Resources
+* **Soft Skills**: Data Storytelling, Communication, Problem-Solving, Cross-functional Collaboration, Strategic Thinking, IA prompting
 
-Laws of motion, gravitation, minting coins, disliking [Robert Hooke](http://en.wikipedia.org/wiki/Robert_Hooke)
+### Professional Experience
 
-### Research interests
+* Format: Reverse chronological order (most recent first).
+  * [Job Title] | [Company Name], [City, Country]
+  * [Start Date] – [End Date] (or Present)
+* Bullet Points: 3-5 strong, results-oriented bullet points per role.
+  * Start with an action verb.
+  * Quantify the achievement.
+  * Explain the impact/benefit.
+* Examples (Tailor these to your specific projects):
+  * "Developed a predictive model using Python and Scikit-learn to forecast customer churn in an e-commerce platform, leading to a 10% reduction in customer attrition and $X revenue savings."
+  * "Performed in-depth econometric analysis on healthcare claims data using R, identifying key drivers of cost escalation and informing policy recommendations that reduced spend by 5%."
+  * "Designed and implemented SQL queries to extract and transform large datasets (1M+ rows) for ad-hoc business intelligence reports, reducing data retrieval time by 50%."
+  * "Created interactive Tableau dashboards visualizing key performance indicators (KPIs) for sports team analytics, enabling coaching staff to optimize player performance and game strategies."
+  * "Conducted A/B tests on social media campaign effectiveness, using statistical analysis to optimize ad spend and increase engagement rates by 15%."
+  * "Collaborated with cross-functional teams to define data requirements, translate business questions into analytical problems, and present complex findings to non-technical stakeholders, driving data-driven decision-making."
+  *  "Cleaned and preprocessed messy, real-world datasets from diverse sources, ensuring data quality and integrity for subsequent analysis."
 
-Cooling, power series, optics, alchemy, planetary motions, apples.
+### Education
 
-## Education
+* Purpose: Highlight your academic background.
+* Format: Reverse chronological order.
+  * [Degree Name] | [Major/Specialization]
+  * [University Name], [City, Country]
+  * [Graduation Date] (or Expected Graduation Date)
+* Optional: GPA (if high, e.g., 3.5+), relevant coursework (e.g., Econometrics, Advanced Statistics, Machine Learning, Data Mining), thesis title (if relevant).
 
-`1654-1660`
-__The King's School, Grantham.__
+### Projects 
 
-`June 1661 - now`
-__Trinity College, Cambridge__
+* Projects (Crucial for demonstrating skills)
+* Purpose: If you have personal projects, Kaggle competitions, or significant academic projects, this is where you shine. Especially useful if you have limited professional experience.
+* Format:
+  * [Project Title] | [Technologies Used: Python, R, SQL, Tableau, etc.]
+  * Brief description (1-2 sentences) of the project's objective and your role.
+  * Bullet points detailing your approach, methodologies, and quantitative results.
+* Examples:
+  * "Predictive Analytics for Customer Lifetime Value (CLV)" | Python (Pandas, Scikit-learn), SQL
+    * Developed a regression model to estimate CLV using transaction data, achieving an RMSE of X.
+    * Identified key customer segments for targeted marketing campaigns, demonstrating potential for 20% increase in CLV.
+  * "Economic Impact Analysis of Sports Events" | R (dplyr, ggplot2), Excel
+    * Conducted a quantitative analysis to estimate the local economic impact of a major sports event, using input-output models.
+    * Presented findings to local government officials, informing future tourism and event strategies.
 
-- Sizar
+### Certifications / Courses
 
-`1667 - death`
-__Trinity College, Cambridge__
+* Purpose: Show continuous learning and specialized knowledge.
+* Examples: Google Data Analytics Certificate, IBM Data Science Professional Certificate, specific Coursera/Udemy courses in ML/Econometrics, AWS/Azure certifications.
 
-- Fellow
-
-## Awards
-
-`2012`
-President, *Royal Society*, London, UK
-
-Associate, *French Academy of Science*, Paris, France
-
-## Publications
-
-<!-- A list is also available [online](http://scholar.google.co.uk/citations?user=LTOTl0YAAAAJ) -->
-
-### Journals
-
-`1669`
-Newton Sir I, De analysi per æquationes numero terminorum infinitas.
-
-`1669`
-Lectiones opticæ.
-
-etc. etc. etc.
-
-### Patents
-
-`2012`
-Infinitesimal calculus for solutions to physics problems, [SMBC](http://www.techdirt.com/articles/20121011/09312820678/if-patents-had-been-around-time-newton.shtml) patent 001
-
-## Occupation
-
-`1600`
-__Royal Mint__, London
-
-- Warden
-- Minted coins
-
-`1600`
-__Lucasian professor of Mathematics__, Cambridge University
+### Publications / Presentations (Optional)
+If you have any academic papers, blog posts, or presentations, list them here.
 
 <!-- ### Footer
 
-Last updated: May 2013 -->
+Last updated: Jun 2025 -->
