@@ -56,5 +56,3 @@ ggplot(titanic, aes(x = Survived, fill = Sex)) +
 ## From tableau
 
 ![tableau db](/assets/img/Dashboard%202.png)
-
-[Dashboard](https://public.tableau.com/shared/445JJ968Q?:display_count=n&:origin=viz_share_link)
