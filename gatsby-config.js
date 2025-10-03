@@ -9,13 +9,23 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `a_data_trip`,
+    description: `In this website, you can find some of the projects I have worked on, as well as my blog posts, 
+ where I share my thoughts and tips on data science topics. You can also learn more about me, 
+ my skills, and my contact details.`,
     author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    siteUrl: `https://alvaro20dam.github.io/my-gatsby-site`,
   },
   plugins: [
     `gatsby-plugin-image`,
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`, // A descriptive name
+        path: `${__dirname}/src/content/posts`, // Verify this path to your copied Jekyll posts
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
