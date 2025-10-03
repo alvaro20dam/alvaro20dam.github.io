@@ -8,13 +8,14 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  pathPrefix: `/a_data_trip`,
   siteMetadata: {
     title: `a_data_trip`,
     description: `In this website, you can find some of the projects I have worked on, as well as my blog posts, 
  where I share my thoughts and tips on data science topics. You can also learn more about me, 
  my skills, and my contact details.`,
     author: `@gatsbyjs`,
-    siteUrl: `https://alvaro20dam.github.io/my-gatsby-site`,
+    siteUrl: `https://alvaro20dam.github.io`,
   },
   plugins: [
     `gatsby-plugin-image`,
