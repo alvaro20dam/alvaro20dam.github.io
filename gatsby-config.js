@@ -8,7 +8,6 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: `/a_data_trip`,
   siteMetadata: {
     title: `a_data_trip`,
     description: `In this website, you can find some of the projects I have worked on, as well as my blog posts, 
