@@ -156,7 +156,7 @@ plt.show()
 
 ```
 
-![png](/assets/img/economic-cycles1.png)
+![png](economic-cycles1.png)
 
 ### Conclusion
 
