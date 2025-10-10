@@ -43,7 +43,9 @@ const UsingTypescript: React.FC<PageProps<DataProps>> = ({
   </Layout>
 )
 
-export const Head: HeadFC<DataProps> = () => <Seo title="Using TypeScript" />
+export const Head: HeadFC<DataProps> = () => (
+  <Seo title="Using TypeScript" description="" children={null} />
+)
 
 export default UsingTypescript
 

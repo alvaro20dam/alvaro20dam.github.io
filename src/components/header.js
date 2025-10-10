@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import Navbar from "./navbar"
 
 const Header = ({ siteTitle }) => (
   <header
@@ -20,43 +21,8 @@ const Header = ({ siteTitle }) => (
     >
       {siteTitle}
     </Link>
-    <Link
-      to="/projects"
-      style={{
-        fontSize: `var(--font-sm)`,
-        textDecoration: `none`,
-      }}
-    >
-      Portfolio Projects
-    </Link>
-    <Link
-      to="/about"
-      style={{
-        fontSize: `var(--font-sm)`,
-        textDecoration: `none`,
-      }}
-    >
-      About
-    </Link>
-    <Link
-      to="/page-2"
-      style={{
-        fontSize: `var(--font-sm)`,
-        textDecoration: `none`,
-      }}
-    >
-      Page-2
-    </Link>
-    <Link
-      to="/using-ssr"
-      style={{
-        fontSize: `var(--font-sm)`,
-        textDecoration: `none`,
-      }}
-    >
-      ssr
-    </Link>
-    {/*     <img
+    <Navbar />
+    {/* <img
       alt="Gatsby logo"
       height={20}
       style={{ margin: 0 }}

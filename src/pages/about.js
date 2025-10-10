@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 export default function About() {
   return (
@@ -11,3 +12,4 @@ export default function About() {
     </Layout>
   )
 }
+export const Head = () => <Seo title="About Page" />
