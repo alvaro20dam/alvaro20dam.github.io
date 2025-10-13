@@ -25,7 +25,10 @@ const IndexPage = ({ data }) => {
 // GraphQL Query to fetch all posts
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      filter: { frontmatter: { layout: { eq: "post" } } }
+      sort: { frontmatter: { date: DESC } }
+    ) {
       edges {
         node {
           id

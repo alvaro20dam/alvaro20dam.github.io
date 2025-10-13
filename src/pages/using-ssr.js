@@ -34,8 +34,6 @@ const UsingSSR = ({ serverData }) => {
 
 export const Head = () => <Seo title="Using SSR" />
 
-export default UsingSSR
-
 export async function getServerData() {
   try {
     const res = await fetch(`https://dog.ceo/api/breed/shiba/images/random`)
@@ -53,3 +51,5 @@ export async function getServerData() {
     }
   }
 }
+
+export default UsingSSR
