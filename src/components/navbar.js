@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav>
       {/* Use the imported class name */}
       <div className={styles.links}>
-        <Link to="/projects">Portfolio Projects</Link>
+        {/* <Link to="/projects">Portfolio Projects</Link> */}
         <Link to="/about">About</Link>
         <Link to="/page-2">Page-2</Link>
         <Link to="/using-typescript">Page-TS</Link>
