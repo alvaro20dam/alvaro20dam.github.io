@@ -1,0 +1,28 @@
+/* src/components/header.module.css */
+
+/* 1. Header Container (Replaces .header-container) */
+.headerContainer {
+    margin: 0 auto;
+    max-width: 960px;
+    /* Use a defined max-width */
+    padding: var(--space-4) var(--size-gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Pushes Title (left) and Nav Block (right) */
+}
+
+/* 2. Site Title Link (Replaces .site-title) */
+.siteTitle {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* 3. Nav and Logo Wrapper (Replaces .nav-and-logo) */
+.navAndLogo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}

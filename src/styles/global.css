@@ -1,18 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 /* GLOBAL RESETS AND MODERN FONT */
 :root {
-    --primary-color: #007acc;
-    /* A modern blue accent */
-    --text-color: #333;
-    --bg-color: #f8f8f8;
-    --font-family: 'Inter', sans-serif;
-    /* Use a modern system font stack */
+/* --- New Color Definitions from my palette.pdf --- */
+    --color-dark: #292E1E;
+    /* Main text, headings, dark elements */
+    --color-primary: #7F0799;
+    /* Primary actions, links, active states */
+    --color-secondary: #9649CB;
+    /* Secondary accents, link hover */
+    --color-subtle: #AFBBF2;
+    /* Borders, dividers, subtle highlight */
+    --color-background: #D3FFF3;
+    /* Main background color */
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--bg-color);
+    background-color: var(--color-background);
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
