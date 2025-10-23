@@ -8,7 +8,7 @@ author:
 - Nelson Mandela Muntz
 meta: "Springfield"
 ---
-
+![images bro](../../images/featured/gaming-banner.png)
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
 
 ## Some great heading (h2)
@@ -19,9 +19,13 @@ Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit maur
 
 ## Another great heading (h2)
 
+![An image to test](../../images/example.png)
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
 
 ### Some great subheading (h3)
+
+![another image](../../images/featured/drums-banner.png)
 
 Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum.
 
@@ -34,6 +38,8 @@ Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum e
 > This quote will *change* your life. It will reveal the <i>secrets</i> of the universe, and all the wonders of humanity. Don't <em>misuse</em> it.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt.
+
+![one more time](../../images/thumbs/drums.png)
 
 ### Some great subheading (h3)
 
@@ -99,6 +105,87 @@ Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing 
 Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.
 
 ### Tables
+
+# Grid table
+
+## Basic example
+
++-------+----------+------+
+| Table Headings   | Here |
++-------+----------+------+
+| Sub   | Headings | Too  |
++=======+==========+======+
+| cell  | column spanning |
++ spans +----------+------+
+| rows  | normal   | cell |
++-------+----------+------+
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
++-------+-----------------+
+
+
++---+
+| a |
++---+
+
+<table border="10">
+  <thead>
+    <tr>
+      <th>segment</th>
+      <th>num_users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Segment 1</td>
+      <td>847</td>
+    </tr>
+        <tr>
+      <td>Segment 2</td>
+      <td>153</td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+***
+`
+
+| foo  |  bar  |
+| :--- | :---: |
+| baz  |  qux  |
+
+`
+
+| Header 1 | Header 2 | Header 3 |
+| :------- | :------: | -------: || Cell A1 | Cell A2 | Cell A3 |
+| Cell B1 | Cell B2 | Cell B3 |
+
+This is my content above the complex table.
+
+<table>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2 (Spans 2 rows)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value A1</td>
+      <td>Value A2 & B2</td>
+    </tr>
+    <tr>
+      <td>Value B1</td>
+    </tr>
+  </tbody>
+</table>
+
+This is my content below the table.
+
 
 | Title 1               | Title 2               | Title 3               | Title 4               |
 | --------------------- | --------------------- | --------------------- | --------------------- |
