@@ -41,5 +41,9 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "overrides": {
+    "msgpackr": "^1.10.14",
+    "lmdb": "^3.0.13"
   }
 }
