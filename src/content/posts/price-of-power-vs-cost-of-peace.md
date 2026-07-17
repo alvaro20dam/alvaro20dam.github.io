@@ -3,7 +3,7 @@ layout: post
 title: "The Price of Power vs. The Cost of Care: A Visual Study in Global Priorities"
 date: "2026-07-17"
 description: "A macro-data analysis and proportional visualization comparing global military expenditures against the total cost of global humanitarian crisis relief."
-author: "Alvaro Alexander González Acosta"
+author: ["Alvaro Alexander González Acosta"]
 tags: ["Data Visualization", "Data Journalism", "Macroeconomics", "Python", "Figma"]
 image: "../../images/featured/price-of-power-vs-cost-of-care.png"
 ---
